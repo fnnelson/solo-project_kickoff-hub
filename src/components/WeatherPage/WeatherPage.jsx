@@ -9,7 +9,7 @@ function WeatherPage() {
     const [weather, setWeather] = useState('');
 
     const api = {
-        key: "666289aa1816b8ba5c3421ad1731d3bf",
+        key: process.env.WEATHER_API_KEY,
         base: "https://api.openweathermap.org/data/2.5/",
     };
 
