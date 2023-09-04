@@ -19,7 +19,7 @@ CREATE TABLE "team" (
   "wins" INTEGER NOT NULL DEFAULT 0,
   "losses" INTEGER NOT NULL DEFAULT 0,
   "draws" INTEGER NOT NULL DEFAULT 0,
-  "total_points" INTEGER NOT NULL DEFAULT 0
+  "total_points" INTEGER GENERATED ALWAYS AS (("wins" * 3) + ("draws" * 1)) STORED
 );
 
 CREATE TABLE "user" (
@@ -27,7 +27,7 @@ CREATE TABLE "user" (
   "username" VARCHAR(80) UNIQUE NOT NULL,
   "password" VARCHAR(1000) NOT NULL,
   "admin" BOOLEAN NOT NULL DEFAULT FALSE,
-  "name" VARCHAR(160) NOT NULL,
+  "name" VARCHAR(160),
   "position" VARCHAR(50),
   "fav_team" VARCHAR(100),
   "interests" VARCHAR(750),

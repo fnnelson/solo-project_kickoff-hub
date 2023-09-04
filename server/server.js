@@ -7,6 +7,8 @@ const app = express();
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
+const weatherRouter = require('./routes/weather.router')
+
 // Route includes
 const userRouter = require('./routes/user.router');
 
@@ -23,6 +25,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/weather', weatherRouter)
 
 // Serve static files
 app.use(express.static('build'));
