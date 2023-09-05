@@ -32,6 +32,10 @@ function Nav() {
               Info Page
             </Link>
 
+            <Link className="navLink" to="/playercalendar">
+              Player Calendar
+            </Link>
+
             <Link className="navLink" to="/weather">
               Weather (API test)
             </Link>

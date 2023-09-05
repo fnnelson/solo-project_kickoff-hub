@@ -20,7 +20,9 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+// my new pages!
 import WeatherPage from '../WeatherPage/WeatherPage';
+import PlayerCalendarPage from '../PlayerCalendarPage/PlayerCalendarPage';
 
 import './App.css';
 
@@ -68,6 +70,14 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/playercalendar"
+          >
+            <PlayerCalendarPage />
           </ProtectedRoute>
 
           <ProtectedRoute

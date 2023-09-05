@@ -25,9 +25,9 @@ function WeatherPage() {
 
     const [forecast, setForecast] = useState('');
 
-    useEffect(() => {
-        fetchCurrentWeather();
-    }, [])
+    // useEffect(() => {
+    //     fetchCurrentWeather();
+    // }, [])
 
     const fetchCurrentWeather = () => {
         console.log("in fetchCurrentWeather")

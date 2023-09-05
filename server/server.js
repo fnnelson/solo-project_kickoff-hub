@@ -7,7 +7,8 @@ const app = express();
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
-const weatherRouter = require('./routes/weather.router')
+const weatherRouter = require('./routes/weather.router');
+const gameRouter = require('./routes/game.router');
 
 // Route includes
 const userRouter = require('./routes/user.router');
@@ -25,7 +26,8 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
-app.use('/api/weather', weatherRouter)
+app.use('/api/weather', weatherRouter);
+app.use('/api/game', gameRouter);
 
 // Serve static files
 app.use(express.static('build'));
