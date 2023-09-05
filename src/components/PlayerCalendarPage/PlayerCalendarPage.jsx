@@ -29,7 +29,7 @@ function PlayerCalendarPage() {
             <div>
                 {games.allGames.map((game, index) => (
                     <div key={index}>
-                        <p>{game.game_date} at {game.game_time}</p>
+                        <p>{game.day_of_week_name}, {game.readable_game_date} at {game.readable_game_time}</p>
                     </div>
                 ))}
             </div>
