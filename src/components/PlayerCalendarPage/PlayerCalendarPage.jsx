@@ -6,7 +6,8 @@ function PlayerCalendarPage() {
 
     const dispatch = useDispatch();
 
-    const games = useSelector(store => store.games);
+    const upcomingGames = useSelector(store => store.games.upcomingGames);
+    const pastGames = useSelector(store => store.games.pastGames);
 
     useEffect(() => {
         fetchGameCalendar()
@@ -25,11 +26,19 @@ function PlayerCalendarPage() {
 
     return (
         <div className="container">
-            <p>Game Calendar</p>
+            <p>Past Games</p>
             <div>
-                {games.allGames.map((game, index) => (
+                {pastGames.map((game, index) => (
                     <div key={index}>
-                        <p>{game.day_of_week_name}, {game.readable_game_date} at {game.readable_game_time}</p>
+                        <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}</p>
+                    </div>
+                ))}
+            </div>
+            <p>Upcoming Games</p>
+            <div>
+                {upcomingGames.map((game, index) => (
+                    <div key={index}>
+                        <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}</p>
                     </div>
                 ))}
             </div>

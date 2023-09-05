@@ -1,8 +1,16 @@
 import { combineReducers } from "redux";
 
-const allGames = (state = [], action) => {
+const pastGames = (state = [], action) => {
     switch (action.type) {
-        case 'SET_ALL_GAMES':
+        case 'SET_PAST_GAMES':
+            return action.payload;
+        default:
+            return state;
+    }
+};
+const upcomingGames = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_UPCOMING_GAMES':
             return action.payload;
         default:
             return state;
@@ -10,5 +18,6 @@ const allGames = (state = [], action) => {
 };
 
 export default combineReducers({
-    allGames,
+    pastGames,
+    upcomingGames,
 });

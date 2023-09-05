@@ -11,17 +11,17 @@ router.get('/', (req, res) => {
     console.log("get made it to the server side!");
     const sqlText = `
         SELECT
-        TO_CHAR(game.game_date, 'Month DD, YYYY') AS readable_game_date,
+        game.game_date,
         CASE
-            WHEN EXTRACT(DOW FROM game.game_date) = 0 THEN 'Sunday'
-            WHEN EXTRACT(DOW FROM game.game_date) = 1 THEN 'Monday'
-            WHEN EXTRACT(DOW FROM game.game_date) = 2 THEN 'Tuesday'
-            WHEN EXTRACT(DOW FROM game.game_date) = 3 THEN 'Wednesday'
-            WHEN EXTRACT(DOW FROM game.game_date) = 4 THEN 'Thursday'
-            WHEN EXTRACT(DOW FROM game.game_date) = 5 THEN 'Friday'
-            WHEN EXTRACT(DOW FROM game.game_date) = 6 THEN 'Saturday'
-        END AS day_of_week_name,
-        TO_CHAR(game.game_time, 'HH:MI') AS readable_game_time,
+            WHEN EXTRACT(DOW FROM game.game_date) = 0 THEN 'Sun'
+            WHEN EXTRACT(DOW FROM game.game_date) = 1 THEN 'Mon'
+            WHEN EXTRACT(DOW FROM game.game_date) = 2 THEN 'Tue'
+            WHEN EXTRACT(DOW FROM game.game_date) = 3 THEN 'Wed'
+            WHEN EXTRACT(DOW FROM game.game_date) = 4 THEN 'Thu'
+            WHEN EXTRACT(DOW FROM game.game_date) = 5 THEN 'Fri'
+            WHEN EXTRACT(DOW FROM game.game_date) = 6 THEN 'Sat'
+        END AS day_of_week,
+        TO_CHAR(game.game_time, 'HH:MI pm') AS game_time,
         game.home_team_score,
         game.away_team_score,
         home_team.team_name AS home_team_name,
@@ -35,7 +35,8 @@ router.get('/', (req, res) => {
     FROM game
     JOIN team AS home_team ON game.home_team_id = home_team.id
     JOIN team AS away_team ON game.away_team_id = away_team.id
-    JOIN field ON game.field_id = field.id;
+    JOIN field ON game.field_id = field.id
+    ORDER BY game_date, game_time;
     `;
     pool.query(sqlText)
         .then(result => {

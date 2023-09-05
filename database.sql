@@ -46,7 +46,7 @@ CREATE TABLE "field" (
 CREATE TABLE "game" (
   "id" SERIAL PRIMARY KEY,
   "game_date" DATE NOT NULL,
-  "game_time" TIME NOT NULL DEFAULT '7:00',
+  "game_time" TIME NOT NULL DEFAULT '19:00',
   "field_id" INTEGER NOT NULL REFERENCES "field",
   "home_team_id" INTEGER NOT NULL REFERENCES "team",
   "home_team_score" INTEGER DEFAULT -1,
@@ -83,7 +83,8 @@ VALUES
     ('8/28/2023', '6:00', 1, 5, 6),
     ('9/4/2023', '8:00', 2, 3, 1),
     ('9/12/2023', '9:00', 2, 5, 2),
-    ('8/12/2023', '7:00', 2, 6, 4);
+    ('8/12/2023', '7:00', 2, 6, 4),
+    ('9/5/2023', '12:00', 1, 1, 4);
     
 INSERT INTO "user" (username, password, admin, name, position, fav_team, interests)
 VALUES
@@ -94,3 +95,31 @@ INSERT INTO announcement (date, description)
 VALUES
     ('9/1/2023', 'creating first announcement'),
     ('9/2/2023', 'today we play!');
+    
+    
+SELECT
+    game.game_date,
+     CASE
+        WHEN EXTRACT(DOW FROM game.game_date) = 0 THEN 'Sun'
+        WHEN EXTRACT(DOW FROM game.game_date) = 1 THEN 'Mon'
+        WHEN EXTRACT(DOW FROM game.game_date) = 2 THEN 'Tue'
+        WHEN EXTRACT(DOW FROM game.game_date) = 3 THEN 'Wed'
+        WHEN EXTRACT(DOW FROM game.game_date) = 4 THEN 'Thu'
+        WHEN EXTRACT(DOW FROM game.game_date) = 5 THEN 'Fri'
+        WHEN EXTRACT(DOW FROM game.game_date) = 6 THEN 'Sat'
+    END AS day_of_week,
+    TO_CHAR(game.game_time, 'HH:MI pm') AS game_time,
+    game.home_team_score,
+    game.away_team_score,
+    home_team.team_name AS home_team_name,
+    home_team.home_jersey,
+    away_team.team_name AS away_team_name,
+    away_team.away_jersey,
+    field.field_name,
+    field.location,
+    field.field_photo,
+    field.maps_link
+FROM game
+JOIN team AS home_team ON game.home_team_id = home_team.id
+JOIN team AS away_team ON game.away_team_id = away_team.id
+JOIN field ON game.field_id = field.id;
