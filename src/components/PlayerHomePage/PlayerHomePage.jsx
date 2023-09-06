@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 
 function PlayerHome() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const user = useSelector((store) => store.user);
     const upcomingGames = useSelector(store => store.games.upcomingGames);
@@ -33,11 +35,23 @@ function PlayerHome() {
 
     // note - the records info should only need to be on the Game Details page
 
+    const goToNextGameDetails = () => {
+        history.push(`/playergamedetails/${nextGame.id}`)
+    }
+
+
     return (
         <div className="container">
             <h3>Profile Button/Preview Here?</h3>
             <h2>Hello, {user.username}!</h2>
-            <div>
+            <div className="next-game"
+                style={{
+                    border: '2px solid #000',
+                    padding: '10px',
+                    backgroundColor: 'lightgray',
+                    cursor: 'pointer'
+                }}
+                onClick={goToNextGameDetails}>
                 <h2>NEXT GAME</h2>
                 <p>
                     Home - {nextGame.home_team_name} {nextGame.home_team_wins}-{nextGame.home_team_losses}-{nextGame.home_team_draws} - Jersey color ({nextGame.home_jersey})

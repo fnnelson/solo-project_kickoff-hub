@@ -33,6 +33,10 @@ function* getGames() {
 
             if (longGameDate < todaysDate) {
                 // console.log('soccer game was in the past')
+                if (game.home_team_score == -1 || game.away_team_score == -1) {
+                    game.home_team_score = '[x]'
+                    game.away_team_score = '[x]'
+                }
                 oldGames.push(game);
             } else if (longGameDate >= todaysDate) {
                 // console.log('soccer game is in the future')
