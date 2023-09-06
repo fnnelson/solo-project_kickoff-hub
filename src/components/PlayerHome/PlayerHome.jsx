@@ -10,6 +10,8 @@ function PlayerHome() {
     useEffect(() => {
         dispatch({ type: 'FETCH_GAMES' })
     }, [dispatch])
+    
+    console.log('upcomingGames[0] is:', upcomingGames[0])
 
     let nextGame = upcomingGames[0];
     let longDate = new Date(nextGame.game_date)
@@ -18,11 +20,9 @@ function PlayerHome() {
     let nextGameShortDate = `${month}/${day}`; // to show short-hand on Home Page
 
     // the data is sometimes showing up as undefined!  Need to make sure games are fetched every time before this page loads
-
     if (!upcomingGames[0]) {
         return <div><p>Loading...</p></div>
     }
-
     // note - the records info should only need to be on the Game Details page
 
     return (
@@ -41,7 +41,6 @@ function PlayerHome() {
                     {nextGame.day_of_week} {nextGameShortDate} {nextGame.game_time} @ {nextGame.field_name}
                 </p>
             </div>
-
         </div >
     );
 }
