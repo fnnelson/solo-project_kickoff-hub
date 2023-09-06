@@ -22,11 +22,11 @@ function* getGames() {
             const mdyGameDate = longGameDate.toLocaleDateString();
 
             let dbTime = game.game_time;
-            console.log('DB time is:', dbTime)
+            // console.log('DB time is:', dbTime)
             if (dbTime[0] == '0') {
                 dbTime = dbTime.slice(1);
             }
-            console.log('newTime is:', dbTime);
+            // console.log('newTime is:', dbTime);
 
             game.game_date = mdyGameDate;
             game.game_time = dbTime;

@@ -23,7 +23,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 // my new pages!
 import WeatherPage from '../WeatherPage/WeatherPage';
 import PlayerCalendarPage from '../PlayerCalendarPage/PlayerCalendarPage';
-import PlayerHome from '../PlayerHome/PlayerHome';
+import PlayerHomePage from '../PlayerHomePage/PlayerHomePage';
+import PlayerGameDetailsPage from '../PlayerGameDetailsPage/PlayerGameDetailsPage';
 
 import './App.css';
 
@@ -71,7 +72,7 @@ function App() {
             exact
             path="/playerhome"
           >
-            <PlayerHome />
+            <PlayerHomePage />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -88,6 +89,14 @@ function App() {
             path="/playercalendar"
           >
             <PlayerCalendarPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/playergamedetails/:gameId"
+          >
+            <PlayerGameDetailsPage />
           </ProtectedRoute>
 
           <ProtectedRoute

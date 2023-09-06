@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import UpcomingGameList from "./UpcomingGameList";
 
 function PlayerCalendarPage() {
 
@@ -41,7 +42,7 @@ function PlayerCalendarPage() {
                     <div>
                         {upcomingGames.map((game, index) => (
                             <div key={index}>
-                                <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}</p>
+                                <UpcomingGameList game={game} />
                             </div>
                         ))}
                     </div>
@@ -52,3 +53,5 @@ function PlayerCalendarPage() {
 }
 
 export default PlayerCalendarPage;
+
+
