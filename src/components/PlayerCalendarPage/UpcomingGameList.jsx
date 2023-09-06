@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 
 function UpcomingGameList({ game }) {
 
-
-
     return (
         <Link to={`/playergamedetails/${game.id}`}>
             <p>
