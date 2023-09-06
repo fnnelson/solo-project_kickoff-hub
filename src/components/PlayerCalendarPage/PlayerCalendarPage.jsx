@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,6 +8,8 @@ function PlayerCalendarPage() {
 
     const upcomingGames = useSelector(store => store.games.upcomingGames);
     const pastGames = useSelector(store => store.games.pastGames);
+
+    const [toggle, setToggle] = useState(false);
 
     useEffect(() => {
         fetchGameCalendar()
@@ -24,24 +26,39 @@ function PlayerCalendarPage() {
             })
     }
 
+    const togglePastFuture = () => {
+        setToggle(!toggle);
+        // console.log('toggle is now:', toggle)
+    }
+
     return (
         <div className="container">
-            <p>Past Games</p>
-            <div>
-                {pastGames.map((game, index) => (
-                    <div key={index}>
-                        <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}</p>
+
+            <button onClick={togglePastFuture}>Toggle</button>
+
+            {toggle ?
+                <>
+                    <p>Past Games</p>
+                    <div>
+                        {pastGames.map((game, index) => (
+                            <div key={index}>
+                                <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}</p>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
-            <p>Upcoming Games</p>
-            <div>
-                {upcomingGames.map((game, index) => (
-                    <div key={index}>
-                        <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}</p>
+                </>
+                :
+                <>
+                    <p>Upcoming Games</p>
+                    <div>
+                        {upcomingGames.map((game, index) => (
+                            <div key={index}>
+                                <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}</p>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
+                </>
+            }
         </div >
     );
 }

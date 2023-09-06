@@ -8,7 +8,7 @@ const axios = require('axios');
  */
 router.get('/', (req, res) => {
     // GET route code here
-    console.log("get made it to the server side!");
+    // console.log("get made it to the server side!");
     const sqlText = `
         SELECT
         game.game_date,
