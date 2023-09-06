@@ -33,8 +33,8 @@ function App() {
   const user = useSelector(store => store.user);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' }),
-      dispatch({ type: 'FETCH_GAMES' })
+    dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: 'FETCH_GAMES' });
   }, [dispatch]);
 
   return (

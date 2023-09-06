@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function PlayerHome() {
@@ -7,22 +7,30 @@ function PlayerHome() {
     const user = useSelector((store) => store.user);
     const upcomingGames = useSelector(store => store.games.upcomingGames);
 
+    const [nextGame, setNextGame] = useState('');
+
     useEffect(() => {
-        dispatch({ type: 'FETCH_GAMES' })
+        dispatch({ type: 'FETCH_GAMES' });
     }, [dispatch])
-    
+
     console.log('upcomingGames[0] is:', upcomingGames[0])
 
-    let nextGame = upcomingGames[0];
-    let longDate = new Date(nextGame.game_date)
-    let month = longDate.getMonth() + 1; // since it goes 0-11
-    let day = longDate.getDate();
-    let nextGameShortDate = `${month}/${day}`; // to show short-hand on Home Page
+    useEffect(() => {
+        if (upcomingGames.length > 0) {
+            console.log('upcomingGames[0] is:', upcomingGames[0]);
+            let longDate = new Date(upcomingGames[0].game_date)
+            let month = longDate.getMonth() + 1; // since it goes 0-11
+            let day = longDate.getDate();
+            let nextGameShortDate = `${month}/${day}`; // to show short-hand on Home Page
+            upcomingGames[0].game_date = nextGameShortDate
+            setNextGame(upcomingGames[0]);
+        }
+    }, [upcomingGames]);
 
-    // the data is sometimes showing up as undefined!  Need to make sure games are fetched every time before this page loads
-    if (!upcomingGames[0]) {
+    if (!nextGame) {
         return <div><p>Loading...</p></div>
     }
+
     // note - the records info should only need to be on the Game Details page
 
     return (
@@ -38,7 +46,7 @@ function PlayerHome() {
                     Away - {nextGame.away_team_name} {nextGame.away_team_wins}-{nextGame.away_team_losses}-{nextGame.away_team_draws} - Jersey color ({nextGame.away_jersey})
                 </p>
                 <p>
-                    {nextGame.day_of_week} {nextGameShortDate} {nextGame.game_time} @ {nextGame.field_name}
+                    {nextGame.day_of_week} {nextGame.game_date} {nextGame.game_time} @ {nextGame.field_name}
                 </p>
             </div>
         </div >

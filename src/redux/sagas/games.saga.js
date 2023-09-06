@@ -6,7 +6,7 @@ function* getGames() {
         const response = yield axios.get('/api/game');
         const allGames = response.data;
         console.log("allGames is:", allGames)
-        
+
         let oldGames = [];
         let newGames = [];
 
@@ -32,16 +32,15 @@ function* getGames() {
             game.game_time = dbTime;
 
             if (longGameDate < todaysDate) {
-                console.log('soccer game was in the past')
+                // console.log('soccer game was in the past')
                 oldGames.push(game);
             } else if (longGameDate >= todaysDate) {
-                console.log('soccer game is in the future')
+                // console.log('soccer game is in the future')
                 newGames.push(game);
             }
-            console.log('old games:', oldGames)
-            console.log('new games:', newGames)
         }
-        console.log('oldGames:', oldGames, 'and newGames:', newGames);
+
+        // console.log('oldGames:', oldGames, 'and newGames:', newGames);
         yield put({ type: 'SET_PAST_GAMES', payload: oldGames })
         yield put({ type: 'SET_UPCOMING_GAMES', payload: newGames });
     } catch (error) {
