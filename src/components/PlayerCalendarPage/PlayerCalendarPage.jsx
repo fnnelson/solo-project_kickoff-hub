@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 function PlayerCalendarPage() {
@@ -12,19 +11,8 @@ function PlayerCalendarPage() {
     const [toggle, setToggle] = useState(false);
 
     useEffect(() => {
-        fetchGameCalendar()
-    }, [])
-
-    const fetchGameCalendar = () => {
-        axios.get('/api/game')
-            .then(response => {
-                // want to send game data to redux state, so it can be used by multiple components
-                dispatch({ type: 'GET_GAMES', payload: response.data })
-            })
-            .catch(error => {
-                console.log("error with GET on client side", error)
-            })
-    }
+        dispatch({ type: 'FETCH_GAMES' })
+    }, [dispatch])
 
     const togglePastFuture = () => {
         setToggle(!toggle);
