@@ -9,8 +9,9 @@ router.get('/', (req, res) => {
     // console.log("announcements GET made it to the server side!");
     const sqlText = `
     SELECT 
-        date,
-        description 
+      id, 
+      date,
+      description 
     FROM announcement 
     ORDER BY date DESC;
 `;
@@ -37,8 +38,7 @@ router.post('/', (req, res) => {
     `;
     pool.query(sqlText, queryParams)
         .then(result => {
-            // console.log(result.rows);
-            res.send(result.rows);
+            res.sendStatus(201);
         })
         .catch(error => {
             console.log("error with announcements GET on server side", error);
@@ -46,5 +46,24 @@ router.post('/', (req, res) => {
         })
 })
 
+/**
+ * DELETE announcement!
+ */
+router.delete('/:id', (req, res) => {
+    console.log("got the param over here on the server", req.params.id)
+    const announcementId = [req.params.id];
+    const sqlText = `
+    DELETE FROM announcement
+    WHERE "id" = ($1);
+    `;
+    pool.query(sqlText, announcementId)
+        .then(result => {
+            res.sendStatus(200)
+        })
+        .catch(error => {
+            console.log("error with announcements GET on server side", error);
+            res.sendStatus(500);
+        })
+})
 
 module.exports = router;

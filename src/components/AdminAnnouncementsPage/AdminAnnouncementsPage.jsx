@@ -12,7 +12,7 @@ function AdminAnnouncements() {
     // console.log('allAnnouncements are:', allAnnouncements)
     // TODO: why does this update upon every letter typed in the input/textarea?
 
-    const addNewAnnouncement = (event) => {
+    const handleAddAnnouncement = (event) => {
         event.preventDefault();
         console.log('newAnnouncement is:', newAnnouncement);
         const announcementObj = {
@@ -20,13 +20,27 @@ function AdminAnnouncements() {
         }
         axios.post('/api/announcement', announcementObj)
             .then(response => {
-                console.log("POST successful from client side")
-                dispatch({type: 'FETCH_ANNOUNCEMENTS'})
+                console.log("POST successful from client side", response)
+                dispatch({ type: 'FETCH_ANNOUNCEMENTS' })
             })
             .catch(error => {
                 console.error("error in POST new announcement!", error)
             })
         setNewAnnouncement('');
+    }
+
+    const handleDeleteAnnouncement = (itemObj) => {
+        console.log("inside handleDelete", itemObj.id);
+        // may as well send the whole object?
+
+        axios.delete(`/api/announcement/${itemObj.id}`)
+            .then(response => {
+                console.log("DELETE successful from client side")
+                dispatch({ type: 'FETCH_ANNOUNCEMENTS' })
+            })
+            .catch(error => {
+                console.error("error in DELETE announcement!", error)
+            })
     }
 
     const announcementStyle = {
@@ -39,7 +53,7 @@ function AdminAnnouncements() {
         <div className="container">
             <p>Admin Announcements Page</p>
 
-            <form onSubmit={addNewAnnouncement}>
+            <form onSubmit={handleAddAnnouncement}>
                 <textarea
                     type="text"
                     style={{ height: '100px', width: '200px' }}
@@ -53,7 +67,7 @@ function AdminAnnouncements() {
             <div style={announcementStyle}>
                 {allAnnouncements.map((item, index) => (
                     <div key={index} style={announcementStyle}>
-                        <p>{item.date}: {item.description}</p>
+                        <p><button onClick={() => handleDeleteAnnouncement(item)}>Delete</button> {item.date}: {item.description}</p>
                     </div>
                 ))}
             </div>
