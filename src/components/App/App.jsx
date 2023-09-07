@@ -23,6 +23,10 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 // my new pages!
 import WeatherPage from '../WeatherPage/WeatherPage';
 import PlayerCalendarPage from '../PlayerCalendarPage/PlayerCalendarPage';
+import PlayerHomePage from '../PlayerHomePage/PlayerHomePage';
+import PlayerGameDetailsPage from '../PlayerGameDetailsPage/PlayerGameDetailsPage';
+// and the admin pages!
+import AdminHomePage from '../AdminHomePage/AdminHomePage';
 
 import './App.css';
 
@@ -33,6 +37,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: 'FETCH_GAMES' });
   }, [dispatch]);
 
   return (
@@ -65,6 +70,14 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/playerhome"
+          >
+            <PlayerHomePage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
             path="/info"
@@ -78,6 +91,22 @@ function App() {
             path="/playercalendar"
           >
             <PlayerCalendarPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/playergamedetails/:gameId"
+          >
+            <PlayerGameDetailsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/adminhome"
+          >
+            <AdminHomePage />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -123,7 +152,8 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              // Forrest - updated this to /playerhome (will add another conditional for admin vs player)
+              <Redirect to="/playerhome" />
               :
               // Otherwise, show the Landing page
               <LandingPage />

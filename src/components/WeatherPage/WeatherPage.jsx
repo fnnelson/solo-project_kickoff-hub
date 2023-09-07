@@ -8,11 +8,12 @@ function WeatherPage() {
     const [search, setSearch] = useState('');
     const [weather, setWeather] = useState('');
 
+    const apiKey = process.env.WEATHER_API_KEY
+
     const api = {
-        key: process.env.WEATHER_API_KEY,
+        key: apiKey,
         base: "https://api.openweathermap.org/data/2.5/",
     };
-
 
     // Note: how to convert from readable date to UNIX timestamp:
     // parseInt((new Date('2012.08.10').getTime() / 1000).toFixed(0))

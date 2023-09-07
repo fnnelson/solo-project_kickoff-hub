@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import UpcomingGameList from "./UpcomingGameList";
 
 function PlayerCalendarPage() {
 
@@ -12,19 +12,8 @@ function PlayerCalendarPage() {
     const [toggle, setToggle] = useState(false);
 
     useEffect(() => {
-        fetchGameCalendar()
-    }, [])
-
-    const fetchGameCalendar = () => {
-        axios.get('/api/game')
-            .then(response => {
-                // want to send game data to redux state, so it can be used by multiple components
-                dispatch({ type: 'GET_GAMES', payload: response.data })
-            })
-            .catch(error => {
-                console.log("error with GET on client side", error)
-            })
-    }
+        dispatch({ type: 'FETCH_GAMES' })
+    }, [dispatch])
 
     const togglePastFuture = () => {
         setToggle(!toggle);
@@ -33,19 +22,18 @@ function PlayerCalendarPage() {
 
     return (
         <div className="container">
-
             <button onClick={togglePastFuture}>Toggle</button>
-
             {toggle ?
                 <>
                     <p>Past Games</p>
                     <div>
                         {pastGames.map((game, index) => (
                             <div key={index}>
-                                <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}</p>
+                                <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} {game.home_team_score} - {game.away_team_score} {game.away_team_name}</p>
                             </div>
                         ))}
                     </div>
+                    <p>[x] - score has not yet been entered</p>
                 </>
                 :
                 <>
@@ -53,7 +41,7 @@ function PlayerCalendarPage() {
                     <div>
                         {upcomingGames.map((game, index) => (
                             <div key={index}>
-                                <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}</p>
+                                <UpcomingGameList game={game} />
                             </div>
                         ))}
                     </div>
@@ -64,3 +52,5 @@ function PlayerCalendarPage() {
 }
 
 export default PlayerCalendarPage;
+
+
