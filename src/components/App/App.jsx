@@ -27,6 +27,7 @@ import PlayerHomePage from '../PlayerHomePage/PlayerHomePage';
 import PlayerGameDetailsPage from '../PlayerGameDetailsPage/PlayerGameDetailsPage';
 // and the admin pages!
 import AdminHomePage from '../AdminHomePage/AdminHomePage';
+import AdminAnnouncements from '../AdminAnnouncementsPage/AdminAnnouncementsPage';
 
 import './App.css';
 
@@ -38,6 +39,8 @@ function App() {
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
     dispatch({ type: 'FETCH_GAMES' });
+    // dispatch({ type: 'FETCH_PROFILES' })
+    dispatch({ type: 'FETCH_ANNOUNCEMENTS' })
   }, [dispatch]);
 
   return (
@@ -107,6 +110,14 @@ function App() {
             path="/adminhome"
           >
             <AdminHomePage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/adminannouncements"
+          >
+            <AdminAnnouncements />
           </ProtectedRoute>
 
           <ProtectedRoute

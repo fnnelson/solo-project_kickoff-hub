@@ -40,8 +40,12 @@ function Nav() {
               Admin Home
             </Link>
 
+            <Link className="navLink" to="/adminannouncements">
+              Admin Announcements
+            </Link>
+
             <Link className="navLink" to="/weather">
-              Weather (API test)
+              *Weather(API test)*
             </Link>
 
             <LogOutButton className="navLink" />
