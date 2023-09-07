@@ -54,10 +54,10 @@ function PlayerHome() {
                 onClick={goToNextGameDetails}>
                 <h2>NEXT GAME</h2>
                 <p>
-                    Home - {nextGame.home_team_name} {nextGame.home_team_wins}-{nextGame.home_team_losses}-{nextGame.home_team_draws} - Jersey color ({nextGame.home_jersey})
+                    Home - {nextGame.home_team_name} - Jersey color ({nextGame.home_jersey})
                 </p>
                 <p>
-                    Away - {nextGame.away_team_name} {nextGame.away_team_wins}-{nextGame.away_team_losses}-{nextGame.away_team_draws} - Jersey color ({nextGame.away_jersey})
+                    Away - {nextGame.away_team_name} - Jersey color ({nextGame.away_jersey})
                 </p>
                 <p>
                     {nextGame.day_of_week} {nextGame.game_date} {nextGame.game_time} @ {nextGame.field_name}

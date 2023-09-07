@@ -34,17 +34,17 @@ function PlayerGameDetailsPage() {
                     <p>game ID: {gameId}</p>
                     <h2>Game Details</h2>
                     <a href={gameDetails.maps_link} target="_blank" rel="noopener noreferrer">
-                        <div style={{ position: 'relative' }}>
+                        <span style={{ position: 'relative' }}>
                             <img
                                 src={gameDetails.field_photo || 'http://via.placeholder.com/450x250'} // Use the provided photo URL or a placeholder
-                                alt="Game Photo"
+                                alt="Field Photo"
                                 style={{
                                     width: '450px',
                                     height: '250px',
                                     border: '2px solid #000'
                                 }}
                             />
-                        </div>
+                        </span>
                     </a>
                     <p>*clicking photo will bring you to Google Maps</p>
                     <h4>{gameDetails.field_name} in {gameDetails.location}</h4>
