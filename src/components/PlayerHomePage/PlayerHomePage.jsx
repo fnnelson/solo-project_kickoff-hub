@@ -43,7 +43,8 @@ function PlayerHome() {
     return (
         <div className="container">
             <h3>Profile Button/Preview Here?</h3>
-            <h2>Hello, {user.username}!</h2>
+            {user.name ? <h2>Hello, {user.name}!</h2> : <h2>Hello, {user.username}!</h2>}
+            <h3>Your id: {user.id}</h3>
             <div className="next-game"
                 style={{
                     border: '2px solid #000',
@@ -56,6 +57,7 @@ function PlayerHome() {
                 <p>
                     Home - {nextGame.home_team_name} - Jersey color ({nextGame.home_jersey})
                 </p>
+                <p>vs.</p>
                 <p>
                     Away - {nextGame.away_team_name} - Jersey color ({nextGame.away_jersey})
                 </p>

@@ -25,6 +25,8 @@ import WeatherPage from '../WeatherPage/WeatherPage';
 import PlayerCalendarPage from '../PlayerCalendarPage/PlayerCalendarPage';
 import PlayerHomePage from '../PlayerHomePage/PlayerHomePage';
 import PlayerGameDetailsPage from '../PlayerGameDetailsPage/PlayerGameDetailsPage';
+// and the admin pages!
+import AdminHomePage from '../AdminHomePage/AdminHomePage';
 
 import './App.css';
 
@@ -97,6 +99,14 @@ function App() {
             path="/playergamedetails/:gameId"
           >
             <PlayerGameDetailsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/adminhome"
+          >
+            <AdminHomePage />
           </ProtectedRoute>
 
           <ProtectedRoute

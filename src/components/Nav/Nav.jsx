@@ -36,6 +36,10 @@ function Nav() {
               Player Calendar
             </Link>
 
+            <Link className="navLink" to="/adminhome">
+              Admin Home
+            </Link>
+
             <Link className="navLink" to="/weather">
               Weather (API test)
             </Link>

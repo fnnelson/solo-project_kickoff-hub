@@ -22,9 +22,7 @@ function PlayerCalendarPage() {
 
     return (
         <div className="container">
-
             <button onClick={togglePastFuture}>Toggle</button>
-
             {toggle ?
                 <>
                     <p>Past Games</p>
