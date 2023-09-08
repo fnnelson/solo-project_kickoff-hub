@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UpcomingGameList from "./UpcomingGameList";
+import AdminPastGamesList from "./AdminPastGamesList";
 
-function PlayerCalendarPage() {
+function AdminSchedulePage() {
 
     const dispatch = useDispatch();
 
@@ -30,13 +30,10 @@ function PlayerCalendarPage() {
                     <div>
                         {pastGames.map((game, index) => (
                             <div key={index}>
-                                {game.home_team_score == -1 || game.away_team_score == -1 ?
-                                    <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} [x] - [x] {game.away_team_name}</p> :
-                                    <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} {game.home_team_score} - {game.away_team_score} {game.away_team_name}</p>}
+                                <AdminPastGamesList game={game} />
                             </div>
                         ))}
                     </div>
-                    <p>[x] - score has not yet been entered</p>
                 </>
                 :
                 <>
@@ -44,7 +41,9 @@ function PlayerCalendarPage() {
                     <div>
                         {upcomingGames.map((game, index) => (
                             <div key={index}>
-                                <UpcomingGameList game={game} />
+                                <p>
+                                    {game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}
+                                </p>
                             </div>
                         ))}
                     </div>
@@ -54,6 +53,7 @@ function PlayerCalendarPage() {
     );
 }
 
-export default PlayerCalendarPage;
+export default AdminSchedulePage;
+
 
 

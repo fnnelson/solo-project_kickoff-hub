@@ -31,6 +31,7 @@ import AdminHomePage from '../AdminHomePage/AdminHomePage';
 import AdminAnnouncementsPage from '../AdminAnnouncementsPage/AdminAnnouncementsPage';
 
 import './App.css';
+import AdminSchedulePage from '../AdminSchedulePage/AdminSchedulePage';
 
 function App() {
   const dispatch = useDispatch();
@@ -119,6 +120,14 @@ function App() {
             path="/adminhome"
           >
             <AdminHomePage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AdminSchedulePage else shows LoginPage
+            exact
+            path="/adminschedule"
+          >
+            <AdminSchedulePage />
           </ProtectedRoute>
 
           <ProtectedRoute
