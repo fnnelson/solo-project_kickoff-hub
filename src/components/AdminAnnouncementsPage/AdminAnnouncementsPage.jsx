@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
-function AdminAnnouncements() {
+function AdminAnnouncementsPage() {
 
     const dispatch = useDispatch();
 
@@ -75,4 +75,4 @@ function AdminAnnouncements() {
     );
 }
 
-export default AdminAnnouncements;
+export default AdminAnnouncementsPage;

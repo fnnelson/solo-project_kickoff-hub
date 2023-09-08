@@ -36,6 +36,10 @@ function Nav() {
               Player Calendar
             </Link>
 
+            <Link className="navLink" to="/playerannouncements">
+              Player Announcements
+            </Link>
+
             <Link className="navLink" to="/adminhome">
               Admin Home
             </Link>

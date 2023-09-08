@@ -47,7 +47,8 @@ function PlayerGameDetailsPage() {
                         </span>
                     </a>
                     <p>*clicking photo will bring you to Google Maps</p>
-                    <h4>{gameDetails.field_name} in {gameDetails.location}</h4>
+                    <h4>{gameDetails.field_name}</h4>
+                    <h5>{gameDetails.address}</h5>
                     <p>Jersey color {gameDetails.home_jersey}</p>
                     <p>{gameDetails.home_team_name} {gameDetails.home_team_wins}-{gameDetails.home_team_losses}-{gameDetails.home_team_draws}</p>
                     <p>vs.</p>

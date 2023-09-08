@@ -25,9 +25,10 @@ import WeatherPage from '../WeatherPage/WeatherPage';
 import PlayerCalendarPage from '../PlayerCalendarPage/PlayerCalendarPage';
 import PlayerHomePage from '../PlayerHomePage/PlayerHomePage';
 import PlayerGameDetailsPage from '../PlayerGameDetailsPage/PlayerGameDetailsPage';
+import PlayerAnnouncementsPage from '../PlayerAnnouncementsPage/PlayerAnnouncementsPage';
 // and the admin pages!
 import AdminHomePage from '../AdminHomePage/AdminHomePage';
-import AdminAnnouncements from '../AdminAnnouncementsPage/AdminAnnouncementsPage';
+import AdminAnnouncementsPage from '../AdminAnnouncementsPage/AdminAnnouncementsPage';
 
 import './App.css';
 
@@ -73,7 +74,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            // logged in shows PlayerHomePage else shows LoginPage
             exact
             path="/playerhome"
           >
@@ -89,7 +90,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows PlayerCalendarPage else shows LoginPage
             exact
             path="/playercalendar"
           >
@@ -97,7 +98,7 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            // logged in shows PlayerGameDetailsPage else shows LoginPage
             exact
             path="/playergamedetails/:gameId"
           >
@@ -105,7 +106,15 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            // logged in shows PlayerAnnouncementsPage else shows LoginPage
+            exact
+            path="/playerannouncements"
+          >
+            <PlayerAnnouncementsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AdminHomePage else shows LoginPage
             exact
             path="/adminhome"
           >
@@ -113,15 +122,15 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            // logged in shows AdminAnnouncementsPage else shows LoginPage
             exact
             path="/adminannouncements"
           >
-            <AdminAnnouncements />
+            <AdminAnnouncementsPage />
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows WeatherPage else shows LoginPage
             exact
             path="/weather"
           >
