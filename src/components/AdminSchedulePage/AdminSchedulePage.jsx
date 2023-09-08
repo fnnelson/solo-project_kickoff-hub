@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import AdminPastGamesList from "./AdminPastGamesList";
+import AdminPastGamesItem from "./AdminPastGamesItem";
 
 function AdminSchedulePage() {
 
@@ -9,7 +9,7 @@ function AdminSchedulePage() {
     const upcomingGames = useSelector(store => store.games.upcomingGames);
     const pastGames = useSelector(store => store.games.pastGames);
 
-    const [toggle, setToggle] = useState(false);
+    const [toggle, setToggle] = useState(true);
 
     // getting rid of this useEffect since App.jsx has it already
     // useEffect(() => {
@@ -30,10 +30,12 @@ function AdminSchedulePage() {
                     <div>
                         {pastGames.map((game, index) => (
                             <div key={index}>
-                                <AdminPastGamesList game={game} />
+                                <AdminPastGamesItem game={game} />
                             </div>
                         ))}
                     </div>
+                    <p>[x] - score has not yet been entered</p>
+                    <p>Note: Update both scores to -1 if needing to erase any scores</p>
                 </>
                 :
                 <>

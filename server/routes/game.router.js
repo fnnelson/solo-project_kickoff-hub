@@ -60,7 +60,7 @@ router.get('/', (req, res) => {
  */
 router.get('/:id', (req, res) => {
     const gameId = [req.params.id];
-    console.log('gameId on server side:', gameId)
+    console.log('gameId on server side:', gameId);
     const sqlText = `
         SELECT
         game.game_date,
@@ -97,11 +97,11 @@ router.get('/:id', (req, res) => {
     pool.query(sqlText, gameId)
         .then(result => {
             // console.log(result.rows)
-            res.send(result.rows) // array with 1 item
+            res.send(result.rows); // array with 1 item?
         })
         .catch(error => {
-            console.log('error on 1 game GET server', error)
-            res.sendStatus(500)
+            console.log('error on 1 game GET server', error);
+            res.sendStatus(500);
         })
 })
 
@@ -112,5 +112,28 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     // POST route code here
 });
+
+/**
+ * PUT - changing scores here!
+ */
+router.put('/:id', (req, res) => {
+    console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
+    const queryParams = [req.params.id, req.body.homeScore, req.body.awayScore];
+    const sqlText = `
+    UPDATE "game"
+    SET "home_team_score" = $2, "away_team_score" = $3
+    WHERE "id" = $1;
+    `;
+    pool.query(sqlText, queryParams)
+        .then(result => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log("error on PUT of scores", error);
+            res.sendStatus(500);
+        })
+
+});
+
 
 module.exports = router;
