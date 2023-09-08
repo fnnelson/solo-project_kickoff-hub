@@ -11,9 +11,10 @@ function PlayerCalendarPage() {
 
     const [toggle, setToggle] = useState(false);
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_GAMES' })
-    }, [dispatch])
+    // getting rid of this useEffect since App.jsx has it already
+    // useEffect(() => {
+    //     dispatch({ type: 'FETCH_GAMES' })
+    // }, [dispatch])
 
     const togglePastFuture = () => {
         setToggle(!toggle);

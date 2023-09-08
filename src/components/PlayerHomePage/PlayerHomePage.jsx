@@ -11,9 +11,10 @@ function PlayerHome() {
 
     const [nextGame, setNextGame] = useState('');
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_GAMES' });
-    }, [dispatch])
+    // getting rid of this useEffect since App.jsx has it already
+    // useEffect(() => {
+    //     dispatch({ type: 'FETCH_GAMES' });
+    // }, [dispatch])
 
     console.log('upcomingGames[0] is:', upcomingGames[0])
 
@@ -33,8 +34,6 @@ function PlayerHome() {
         return <div><p>Loading...</p></div>
     }
 
-    // note - the records info should only need to be on the Game Details page
-
     const goToNextGameDetails = () => {
         history.push(`/playergamedetails/${nextGame.id}`)
     }
@@ -50,6 +49,7 @@ function PlayerHome() {
                     border: '2px solid #000',
                     padding: '10px',
                     backgroundColor: 'lightgray',
+                    display: 'inline-block',
                     cursor: 'pointer'
                 }}
                 onClick={goToNextGameDetails}>

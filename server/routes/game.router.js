@@ -1,7 +1,6 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const axios = require('axios');
 
 /**
  * GET all games!
@@ -36,7 +35,7 @@ router.get('/', (req, res) => {
         away_team.losses AS away_team_losses,
         away_team.draws AS away_team_draws,
         field.field_name,
-        field.location,
+        field.address,
         field.field_photo,
         field.maps_link
     FROM game
@@ -86,7 +85,7 @@ router.get('/:id', (req, res) => {
         away_team.losses AS away_team_losses,
         away_team.draws AS away_team_draws,
         field.field_name,
-        field.location,
+        field.address,
         field.field_photo,
         field.maps_link
     FROM game
