@@ -110,8 +110,29 @@ router.get('/:id', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
-    // POST route code here
+    console.log("made it to the server side POST new game", req.body)
+    const queryParams = [
+        req.body.gameDate,
+        req.body.gameTime,
+        req.body.fieldId,
+        req.body.homeTeamId,
+        req.body.awayTeamId
+    ]
+    const sqlText = `
+      INSERT INTO "game" ("game_date", "game_time", "field_id", "home_team_id", "away_team_id")
+      VALUES ($1, $2, $3, $4, $5);
+    `;
+    pool.query(sqlText, queryParams)
+        .then(result => {
+            console.log('POST worked!');
+            res.sendStatus(201);
+        })
+        .catch(error => {
+            console.log("error on POST", error);
+        })
+
 });
+
 
 /**
  * PUT - changing scores here!
@@ -132,8 +153,29 @@ router.put('/:id', (req, res) => {
             console.log("error on PUT of scores", error);
             res.sendStatus(500);
         })
-
 });
+
+/**
+* DELETE route
+*/
+
+router.delete('/:id', (req, res) => {
+    console.log('req.params.id is:', req.params.id)
+    const deletedGameId = [req.params.id];
+    const sqlText = `
+            DELETE FROM "game"
+            WHERE "id" = $1;
+            `;
+    pool.query(sqlText, deletedGameId)
+        .then(result => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log("error on PUT of scores", error);
+            res.sendStatus(500);
+        })
+});
+
 
 
 module.exports = router;

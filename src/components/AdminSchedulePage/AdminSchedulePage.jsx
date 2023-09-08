@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AdminPastGamesItem from "./AdminPastGamesItem";
+import AdminUpcomingGamesItem from "./AdminUpcomingGamesItem";
+import AdminSchedulingForm from "./AdminSchedulingForm";
 
 function AdminSchedulePage() {
 
@@ -43,12 +45,13 @@ function AdminSchedulePage() {
                     <div>
                         {upcomingGames.map((game, index) => (
                             <div key={index}>
-                                <p>
-                                    {game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}
-                                </p>
+                                <AdminUpcomingGamesItem game={game} />
                             </div>
                         ))}
                     </div>
+                    <h3>Add New Game to Schedule:</h3>
+                    <h4>IDEA: add delete (and edit?) buttons to games, and create the routes/queries</h4>
+                    <AdminSchedulingForm />
                 </>
             }
         </div >
@@ -56,6 +59,8 @@ function AdminSchedulePage() {
 }
 
 export default AdminSchedulePage;
+
+
 
 
 

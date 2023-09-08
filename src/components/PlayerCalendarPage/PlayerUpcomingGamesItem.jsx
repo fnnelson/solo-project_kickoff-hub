@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function UpcomingGameList({ game }) {
+function PlayerUpcomingGamesItem({ game }) {
 
     return (
         <Link to={`/playergamedetails/${game.id}`}>
@@ -12,4 +12,4 @@ function UpcomingGameList({ game }) {
     );
 }
 
-export default UpcomingGameList;
+export default PlayerUpcomingGamesItem;

@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+// Page at '/playergamedetails/(gameid)'
+
 function PlayerGameDetailsPage() {
 
     const { gameId } = useParams();
@@ -17,6 +19,18 @@ function PlayerGameDetailsPage() {
         axios.get(`/api/game/${gameId}`)
             .then(response => {
                 console.log('response with GET single game:', response.data)
+                let gameDate = new Date(response.data[0].game_date);
+                let day = gameDate.getDate();
+                let month = gameDate.getMonth() + 1; // month plus 1 since it does 0-11
+                let formattedDate = `${month}/${day}`
+                response.data[0].game_date = formattedDate;
+                let dbTime = response.data[0].game_time;
+                // console.log('DB time is:', dbTime)
+                if (dbTime[0] == '0') {
+                    dbTime = dbTime.slice(1);
+                    response.data[0].game_time = dbTime;
+                }
+
                 setGameDetails(response.data[0])
             })
             .catch(error => {
@@ -49,6 +63,7 @@ function PlayerGameDetailsPage() {
                     <p>*clicking photo will bring you to Google Maps</p>
                     <h4>{gameDetails.field_name}</h4>
                     <h5>{gameDetails.address}</h5>
+                    <h3>{gameDetails.game_date} @ {gameDetails.game_time}</h3>
                     <p>Jersey color {gameDetails.home_jersey}</p>
                     <p>{gameDetails.home_team_name} {gameDetails.home_team_wins}-{gameDetails.home_team_losses}-{gameDetails.home_team_draws}</p>
                     <p>vs.</p>

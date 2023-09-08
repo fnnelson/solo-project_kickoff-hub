@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UpcomingGameList from "./UpcomingGameList";
+import PlayerUpcomingGamesItem from "./PlayerUpcomingGamesItem";
+
+// Page at '/playercalendar'
 
 function PlayerCalendarPage() {
 
@@ -44,7 +46,7 @@ function PlayerCalendarPage() {
                     <div>
                         {upcomingGames.map((game, index) => (
                             <div key={index}>
-                                <UpcomingGameList game={game} />
+                                <PlayerUpcomingGamesItem game={game} />
                             </div>
                         ))}
                     </div>

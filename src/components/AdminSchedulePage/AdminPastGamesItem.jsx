@@ -3,6 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 
+// Page at '/adminschedule'
+
 function AdminPastGamesItem({ game }) {
 
     const dispatch = useDispatch();
