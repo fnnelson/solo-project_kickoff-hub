@@ -57,7 +57,7 @@ CREATE TABLE "game" (
 
 CREATE TABLE "announcement" (
   "id" SERIAL PRIMARY KEY,
-  "date" DATE NOT NULL,
+  "date" TIMESTAMP NOT NULL DEFAULT NOW(),
   "description" VARCHAR(750) NOT NULL
 );
 
