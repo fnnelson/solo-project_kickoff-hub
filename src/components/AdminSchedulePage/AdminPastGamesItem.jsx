@@ -18,10 +18,12 @@ function AdminPastGamesItem({ game }) {
 
     const handleSave = () => {
         console.log("updated scores are:", homeTeamScore, "to", awayTeamScore, "for game #", game.id)
-        if (homeTeamScore == '' || awayTeamScore == '') {
+        if ((homeTeamScore == '' && awayTeamScore != '') || awayTeamScore == '' && homeTeamScore != '') {
             alert("Please enter both scores")
         } else if ((homeTeamScore == -1 && awayTeamScore != -1) || (awayTeamScore == -1 && homeTeamScore != -1)) {
             alert("Enter both scores as -1 if erasing scores, cannot only erase one");
+        } else if (homeTeamScore == '' && awayTeamScore == '') {
+            setEditToggle(false);
         } else {
             let gameId = game.id;
             let updatedScoreObj = {
