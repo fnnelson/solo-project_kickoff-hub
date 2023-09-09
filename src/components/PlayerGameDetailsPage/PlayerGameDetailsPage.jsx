@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 // Page at '/playergamedetails/(gameid)'
 
@@ -44,9 +45,13 @@ function PlayerGameDetailsPage() {
         <div className="container">
             {gameDetails ? (
                 <div>
-                    <p>Single Game Details Component</p>
-                    <p>game ID: {gameId}</p>
-                    <h2>Game Details</h2>
+                    {gameDetails.cancel_status ?
+                        <>
+                            <h1 style={{ color: 'red' }}>Game Canceled <Link to='/playerannouncements'><button>Announcements</button></Link> </h1>
+                        </>
+                        :
+                        <h2>Game Details</h2>
+                    }
                     <a href={gameDetails.maps_link} target="_blank" rel="noopener noreferrer">
                         <span style={{ position: 'relative' }}>
                             <img

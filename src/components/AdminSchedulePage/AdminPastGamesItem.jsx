@@ -32,7 +32,7 @@ function AdminPastGamesItem({ game }) {
                 homeScore: Number(homeTeamScore),
                 awayScore: Number(awayTeamScore)
             };
-            axios.put(`/api/game/${gameId}`, updatedScoreObj)
+            axios.put(`/api/game/score/${gameId}`, updatedScoreObj)
                 .then(response => {
                     console.log("PUT successful!", response);
                     dispatch({ type: 'FETCH_GAMES' })
@@ -50,7 +50,11 @@ function AdminPastGamesItem({ game }) {
 
     return (
         <div>
-            {editToggle ? (
+            {game.cancel_status ? (
+                <p style={{ backgroundColor: 'lightgray' }}>
+                    **GAME CANCELLED** <s>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} N/A - N/A {game.away_team_name}</s> **GAME CANCELLED**
+                </p>
+            ) : (editToggle ? (
                 game.home_team_score === -1 || game.away_team_score === -1 ? (
                     <>
                         <p style={{ backgroundColor: 'pink' }}>
@@ -99,7 +103,7 @@ function AdminPastGamesItem({ game }) {
                         <button onClick={toggleEditOption}>Edit</button> {game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} {game.home_team_score} - {game.away_team_score} {game.away_team_name}
                     </p>
                 </>
-            )}
+            ))}
         </div>
     );
 }

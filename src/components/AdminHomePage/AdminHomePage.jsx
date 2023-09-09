@@ -24,7 +24,7 @@ function AdminHomePage() {
                     <h1>Add Scores / New Games</h1>
                 </div>
             </Link>
-            <Link>
+            <Link to='/adminannouncements'>
                 <br />
                 <div style={boxStyle}>
                     <h1>Add New Announcement</h1>

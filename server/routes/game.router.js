@@ -22,6 +22,7 @@ router.get('/', (req, res) => {
             WHEN EXTRACT(DOW FROM game.game_date) = 6 THEN 'Sat'
         END AS day_of_week,
         TO_CHAR(game.game_time, 'HH:MI pm') AS game_time,
+        game.cancel_status,
         game.home_team_score,
         game.away_team_score,
         home_team.team_name AS home_team_name,
@@ -74,6 +75,7 @@ router.get('/:id', (req, res) => {
             WHEN EXTRACT(DOW FROM game.game_date) = 6 THEN 'Sat'
         END AS day_of_week,
         TO_CHAR(game.game_time, 'HH:MI pm') AS game_time,
+        game.cancel_status,
         home_team.team_name AS home_team_name,
         home_team.home_jersey,
         home_team.wins AS home_team_wins,
@@ -137,12 +139,33 @@ router.post('/', (req, res) => {
 /**
  * PUT - changing scores here!
  */
-router.put('/:id', (req, res) => {
+router.put('/score/:id', (req, res) => {
     console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
     const queryParams = [req.params.id, req.body.homeScore, req.body.awayScore];
     const sqlText = `
     UPDATE "game"
     SET "home_team_score" = $2, "away_team_score" = $3
+    WHERE "id" = $1;
+    `;
+    pool.query(sqlText, queryParams)
+        .then(result => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log("error on PUT of scores", error);
+            res.sendStatus(500);
+        })
+});
+
+/**
+ * PUT - updating whether a game is cancelled!
+ */
+router.put('/cancel/:id', (req, res) => {
+    console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
+    const queryParams = [req.params.id, req.body.cancelStatus];
+    const sqlText = `
+    UPDATE "game"
+    SET "cancel_status" = $2
     WHERE "id" = $1;
     `;
     pool.query(sqlText, queryParams)

@@ -28,7 +28,7 @@ function AdminSchedulePage() {
             <button onClick={togglePastFuture}>Toggle</button>
             {toggle ?
                 <>
-                    <p>Past Games</p>
+                    <h3>Past Games</h3>
                     <div>
                         {pastGames.map((game, index) => (
                             <div key={index}>
@@ -41,7 +41,7 @@ function AdminSchedulePage() {
                 </>
                 :
                 <>
-                    <p>Upcoming Games</p>
+                    <h3>Upcoming Games</h3>
                     <div>
                         {upcomingGames.map((game, index) => (
                             <div key={index}>
@@ -50,7 +50,6 @@ function AdminSchedulePage() {
                         ))}
                     </div>
                     <h3>Add New Game to Schedule:</h3>
-                    <h4>IDEA: add delete (and edit?) buttons to games, and create the routes/queries</h4>
                     <AdminSchedulingForm />
                 </>
             }
