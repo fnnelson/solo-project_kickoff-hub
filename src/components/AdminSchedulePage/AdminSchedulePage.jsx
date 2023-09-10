@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import AdminPastGamesItem from "./AdminPastGamesItem";
 import AdminUpcomingGamesItem from "./AdminUpcomingGamesItem";
 import AdminSchedulingForm from "./AdminSchedulingForm";
@@ -51,6 +52,7 @@ function AdminSchedulePage() {
                     </div>
                     <h3>Add New Game to Schedule:</h3>
                     <AdminSchedulingForm />
+                    <Link to='/adminannouncements'><h3>Announcements Page</h3></Link>
                 </>
             }
         </div >

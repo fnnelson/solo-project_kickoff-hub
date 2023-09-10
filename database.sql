@@ -50,8 +50,10 @@ CREATE TABLE "game" (
   "field_id" INTEGER NOT NULL REFERENCES "field",
   "home_team_id" INTEGER NOT NULL REFERENCES "team",
   "home_team_score" INTEGER DEFAULT -1,
+  "home_team_result" VARCHAR(10),
   "away_team_id" INTEGER NOT NULL REFERENCES "team",
   "away_team_score" INTEGER DEFAULT -1,
+  "away_team_result" VARCHAR(10),
   "cancel_status" BOOLEAN DEFAULT FALSE
 );
 
