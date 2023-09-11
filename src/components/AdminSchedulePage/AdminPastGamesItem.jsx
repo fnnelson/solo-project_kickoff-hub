@@ -47,7 +47,7 @@ function AdminPastGamesItem({ game }) {
                 homeTeamId: game.home_team_id,
                 awayTeamId: game.away_team_id,
             };
-            // 1st PUT request to update "game" table
+            // PUT request to update "game" table and transaction used to also update the team table based on game data
             axios.put(`/api/game/score/${gameId}`, updatedScoreObj)
                 .then(response => {
                     console.log("1st PUT successful!", response);
@@ -57,24 +57,6 @@ function AdminPastGamesItem({ game }) {
                     console.error("1st PUT ain't PUTtin", error);
                 });
 
-            // 2nd PUT request to update "team" table
-            axios.put(`/api/game/result/home/${gameId}`, updatedScoreObj)
-                .then(response => {
-                    console.log("2nd PUT successful!", response);
-                    dispatch({ type: 'FETCH_GAMES' })
-                })
-                .catch(error => {
-                    console.error("2nd PUT ain't PUTtin", error);
-                })
-            // 3rd PUT request to update "team" table
-            axios.put(`/api/game/result/away/${gameId}`, updatedScoreObj)
-                .then(response => {
-                    console.log("2nd PUT successful!", response);
-                    dispatch({ type: 'FETCH_GAMES' })
-                })
-                .catch(error => {
-                    console.error("2nd PUT ain't PUTtin", error);
-                })
             setEditToggle(false);
         }
     }

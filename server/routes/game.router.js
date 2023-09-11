@@ -139,9 +139,9 @@ router.post('/', (req, res) => {
 
 
 /**
- * PUT 1/3 - changing game scores here!
+ * PUT - transaction type PUT!
  */
-router.put('/score/:id', (req, res) => {
+router.put('/score/:id', async (req, res) => {
     console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
     const queryParams = [
         req.params.id, // $1
@@ -150,102 +150,56 @@ router.put('/score/:id', (req, res) => {
         req.body.homeResult, // $4
         req.body.awayResult, // $5
     ];
-    const sqlText = `
-    UPDATE "game"
-    SET "home_team_score" = $2, "away_team_score" = $3, "home_team_result" = $4, "away_team_result" = $5 
-    WHERE "id" = $1;
+    const connection = await pool.connect();
+    try {
+        await connection.query('BEGIN');
+        const sqlText = `
+UPDATE "game"
+SET "home_team_score" = $2, "away_team_score" = $3, "home_team_result" = $4, "away_team_result" = $5 
+WHERE "id" = $1;
     `;
-    pool.query(sqlText, queryParams)
-        .then(result => {
-            res.sendStatus(200);
-        })
-        .catch(error => {
-            console.log("error on PUT of scores", error);
-            res.sendStatus(500);
-        })
-});
-
-/**
- * PUT 2/3 - changing home team results here!
- */
-router.put('/result/home/:id', (req, res) => {
-    console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
-    const queryParams = [
-        req.body.homeResult, // $1
-        req.body.homeTeamId // $2
-    ];
-    const sqlText = `
-    UPDATE "team"
-    SET
-        "wins" = CASE
-            WHEN $1 = 'W' THEN "wins" + 1
-            ELSE "wins"
-        END,
-        
-        "losses" = CASE
-            WHEN $1 = 'L' THEN "losses" + 1
-            ELSE "losses"
-        END,
-        
-        "draws" = CASE
-            WHEN $1 = 'D' THEN "draws" + 1
-            ELSE "draws"
+        const sqlText2 = `
+    UPDATE team
+    SET wins = (
+      SELECT COUNT(*) FROM game 
+      WHERE (game.home_team_id = team.id AND game.home_team_result = 'W')
+         OR (game.away_team_id = team.id AND game.away_team_result = 'W')
+    ),
+    losses = (
+      SELECT COUNT(*) FROM game 
+      WHERE (game.home_team_id = team.id AND game.home_team_result = 'L')
+         OR (game.away_team_id = team.id AND game.away_team_result = 'L')
+    ),
+    draws = (
+      SELECT COUNT(*) FROM game 
+      WHERE (game.home_team_id = team.id AND game.home_team_result = 'D')
+         OR (game.away_team_id = team.id AND game.away_team_result = 'D')
+    ),
+    goal_differential = (
+      SELECT SUM(
+        CASE
+          WHEN game.home_team_id = team.id THEN game.home_team_score - game.away_team_score
+          WHEN game.away_team_id = team.id THEN game.away_team_score - game.home_team_score
+          ELSE 0
         END
-    
-        WHERE $1 IN ('W', 'L', 'D')
-        AND id IN ($2);
+      ) FROM game
+      WHERE (game.home_team_id = team.id OR game.away_team_id = team.id)
+    );
     `;
-    pool.query(sqlText, queryParams)
-        .then(result => {
-            res.sendStatus(200);
-        })
-        .catch(error => {
-            console.log("error on PUT of scores", error);
-            res.sendStatus(500);
-        })
+        // first run query to update game results
+        await connection.query(sqlText, queryParams);
+        // then run query to update team table using info from game table
+        await connection.query(sqlText2);
+        await connection.query('COMMIT');
+        res.sendStatus(200);
+    } catch (error) {
+        await connection.query('ROLLBACK');
+        console.log('Transaction Error - Rolling back transfer', error)
+        res.sendStatus(500);
+    } finally {
+        connection.release();
+    }
 });
-
-/**
- * PUT 3/3 - changing away team results here!
- */
-router.put('/result/away/:id', (req, res) => {
-    console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
-    const queryParams = [
-        req.body.awayResult, // $1
-        req.body.awayTeamId, // $2
-    ];
-    const sqlText = `
-    UPDATE "team"
-    SET
-        "wins" = CASE
-            WHEN $1 = 'W' THEN "wins" + 1
-            ELSE "wins"
-        END,
-        
-        "losses" = CASE
-            WHEN $1 = 'L' THEN "losses" + 1
-            ELSE "losses"
-        END,
-        
-        "draws" = CASE
-            WHEN $1 = 'D' THEN "draws" + 1
-            ELSE "draws"
-        END
-
-        WHERE $1 IN ('W', 'L', 'D')
-        AND id IN ($2);
-    `;
-    pool.query(sqlText, queryParams)
-        .then(result => {
-            res.sendStatus(200);
-        })
-        .catch(error => {
-            console.log("error on PUT of scores", error);
-            res.sendStatus(500);
-        })
-});
-
-
 
 /**
  * PUT - updating whether a game is cancelled!
