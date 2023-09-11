@@ -139,7 +139,7 @@ router.post('/', (req, res) => {
 
 
 /**
- * PUT 1/2 - changing scores here!
+ * PUT 1/3 - changing game scores here!
  */
 router.put('/score/:id', (req, res) => {
     console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
@@ -166,46 +166,34 @@ router.put('/score/:id', (req, res) => {
 });
 
 /**
- * PUT 2/2 - changing team results here!
+ * PUT 2/3 - changing home team results here!
  */
-router.put('/result/:id', (req, res) => {
+router.put('/result/home/:id', (req, res) => {
     console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
     const queryParams = [
         req.body.homeResult, // $1
-        req.body.awayResult, // $2
-        req.body.homeTeamId, // $3
-        req.body.awayTeamId // $4
+        req.body.homeTeamId // $2
     ];
     const sqlText = `
     UPDATE "team"
-SET
-    "wins" = CASE
-        WHEN $1 = 'W' THEN
-            CASE
-                WHEN $2 = 'W' THEN "wins" + 1
-                ELSE "wins"
-            END
-        ELSE "wins"
-    END,
-    "losses" = CASE
-        WHEN $1 = 'L' THEN
-            CASE
-                WHEN $2 = 'L' THEN "losses" + 1
-                ELSE "losses"
-            END
-        ELSE "losses"
-    END,
-    "draws" = CASE
-        WHEN $1 = 'D' THEN
-            CASE
-                WHEN $2 = 'D' THEN "draws" + 1
-                ELSE "draws"
-            END
-        ELSE "draws"
-    END
-WHERE ($1 = 'W' OR $1 = 'L' OR $1 = 'D')
-  AND ($2 = 'W' OR $2 = 'L' OR $2 = 'D')
-  AND id IN ($3, $4);
+    SET
+        "wins" = CASE
+            WHEN $1 = 'W' THEN "wins" + 1
+            ELSE "wins"
+        END,
+        
+        "losses" = CASE
+            WHEN $1 = 'L' THEN "losses" + 1
+            ELSE "losses"
+        END,
+        
+        "draws" = CASE
+            WHEN $1 = 'D' THEN "draws" + 1
+            ELSE "draws"
+        END
+    
+        WHERE $1 IN ('W', 'L', 'D')
+        AND id IN ($2);
     `;
     pool.query(sqlText, queryParams)
         .then(result => {
@@ -216,6 +204,48 @@ WHERE ($1 = 'W' OR $1 = 'L' OR $1 = 'D')
             res.sendStatus(500);
         })
 });
+
+/**
+ * PUT 3/3 - changing away team results here!
+ */
+router.put('/result/away/:id', (req, res) => {
+    console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
+    const queryParams = [
+        req.body.awayResult, // $1
+        req.body.awayTeamId, // $2
+    ];
+    const sqlText = `
+    UPDATE "team"
+    SET
+        "wins" = CASE
+            WHEN $1 = 'W' THEN "wins" + 1
+            ELSE "wins"
+        END,
+        
+        "losses" = CASE
+            WHEN $1 = 'L' THEN "losses" + 1
+            ELSE "losses"
+        END,
+        
+        "draws" = CASE
+            WHEN $1 = 'D' THEN "draws" + 1
+            ELSE "draws"
+        END
+
+        WHERE $1 IN ('W', 'L', 'D')
+        AND id IN ($2);
+    `;
+    pool.query(sqlText, queryParams)
+        .then(result => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log("error on PUT of scores", error);
+            res.sendStatus(500);
+        })
+});
+
+
 
 /**
  * PUT - updating whether a game is cancelled!

@@ -58,7 +58,16 @@ function AdminPastGamesItem({ game }) {
                 });
 
             // 2nd PUT request to update "team" table
-            axios.put(`/api/game/result/${gameId}`, updatedScoreObj)
+            axios.put(`/api/game/result/home/${gameId}`, updatedScoreObj)
+                .then(response => {
+                    console.log("2nd PUT successful!", response);
+                    dispatch({ type: 'FETCH_GAMES' })
+                })
+                .catch(error => {
+                    console.error("2nd PUT ain't PUTtin", error);
+                })
+            // 3rd PUT request to update "team" table
+            axios.put(`/api/game/result/away/${gameId}`, updatedScoreObj)
                 .then(response => {
                     console.log("2nd PUT successful!", response);
                     dispatch({ type: 'FETCH_GAMES' })
