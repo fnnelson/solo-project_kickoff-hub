@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
+// Page at '/playerannouncements'
+
 function PlayerAnnouncementsPage() {
 
     const allAnnouncements = useSelector(store => store.announcements.allAnnouncements)

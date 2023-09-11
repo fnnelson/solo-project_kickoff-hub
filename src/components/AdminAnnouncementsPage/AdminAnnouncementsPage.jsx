@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
+// Page at '/adminannouncements'
+
 function AdminAnnouncementsPage() {
 
     const dispatch = useDispatch();
@@ -56,11 +58,15 @@ function AdminAnnouncementsPage() {
             <form onSubmit={handleAddAnnouncement}>
                 <textarea
                     type="text"
-                    style={{ height: '100px', width: '200px' }}
+                    style={{ minHeight: '100px', width: '400px' }}
                     placeholder='type new announcement...'
                     value={newAnnouncement}
                     onChange={(event) => setNewAnnouncement(event.target.value)}
-                />
+                    onInput={(event) => {
+                        event.target.style.height = 'auto';
+                        event.target.style.height = event.target.scrollHeight + 'px';
+                    }}
+                ></textarea>
                 <button style={{ margin: '5px' }} type='submit'>Add</button>
             </form>
 

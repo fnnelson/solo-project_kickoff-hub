@@ -38,33 +38,56 @@ function PlayerHome() {
         history.push(`/playergamedetails/${nextGame.id}`)
     }
 
-
     return (
         <div className="container">
             <h3>Profile Button/Preview Here?</h3>
             {user.name ? <h2>Hello, {user.name}!</h2> : <h2>Hello, {user.username}!</h2>}
-            <h3>Your id: {user.id}</h3>
-            <div className="next-game"
-                style={{
-                    border: '2px solid #000',
-                    padding: '10px',
-                    backgroundColor: 'lightgray',
-                    display: 'inline-block',
-                    cursor: 'pointer'
-                }}
-                onClick={goToNextGameDetails}>
-                <h2>NEXT GAME</h2>
-                <p>
-                    Home - {nextGame.home_team_name} - Jersey color ({nextGame.home_jersey})
-                </p>
-                <p>vs.</p>
-                <p>
-                    Away - {nextGame.away_team_name} - Jersey color ({nextGame.away_jersey})
-                </p>
-                <p>
-                    {nextGame.day_of_week} {nextGame.game_date} {nextGame.game_time} @ {nextGame.field_name}
-                </p>
-            </div>
+
+            {nextGame.cancel_status ? (
+                <div className="next-game"
+                    style={{
+                        border: '2px solid red',
+                        padding: '10px',
+                        backgroundColor: 'pink',
+                        display: 'inline-block',
+                        cursor: 'pointer'
+                    }}
+                    onClick={goToNextGameDetails}>
+                    <h2>GAME CANCELED</h2>
+                    <p>
+                        Home - {nextGame.home_team_name} - Jersey color ({nextGame.home_jersey})
+                    </p>
+                    <p>vs.</p>
+                    <p>
+                        Away - {nextGame.away_team_name} - Jersey color ({nextGame.away_jersey})
+                    </p>
+                    <p>
+                        {nextGame.day_of_week} {nextGame.game_date} {nextGame.game_time} @ {nextGame.field_name}
+                    </p>
+                </div>
+            ) : (
+                <div className="next-game"
+                    style={{
+                        border: '2px solid #000',
+                        padding: '10px',
+                        backgroundColor: 'lightgray',
+                        display: 'inline-block',
+                        cursor: 'pointer'
+                    }}
+                    onClick={goToNextGameDetails}>
+                    <h2>NEXT GAME</h2>
+                    <p>
+                        Home - {nextGame.home_team_name} - Jersey color ({nextGame.home_jersey})
+                    </p>
+                    <p>vs.</p>
+                    <p>
+                        Away - {nextGame.away_team_name} - Jersey color ({nextGame.away_jersey})
+                    </p>
+                    <p>
+                        {nextGame.day_of_week} {nextGame.game_date} {nextGame.game_time} @ {nextGame.field_name}
+                    </p>
+                </div>
+            )}
         </div >
     );
 }

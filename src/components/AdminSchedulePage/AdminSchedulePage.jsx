@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import PlayerUpcomingGamesItem from "./PlayerUpcomingGamesItem";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import AdminPastGamesItem from "./AdminPastGamesItem";
+import AdminUpcomingGamesItem from "./AdminUpcomingGamesItem";
+import AdminSchedulingForm from "./AdminSchedulingForm";
 
-// Page at '/playercalendar'
-
-function PlayerCalendarPage() {
-
-    const dispatch = useDispatch();
+function AdminSchedulePage() {
 
     const upcomingGames = useSelector(store => store.games.upcomingGames);
     const pastGames = useSelector(store => store.games.pastGames);
 
-    const [toggle, setToggle] = useState(false);
-
-    // getting rid of this useEffect since App.jsx has it already
-    // useEffect(() => {
-    //     dispatch({ type: 'FETCH_GAMES' })
-    // }, [dispatch])
+    const [toggle, setToggle] = useState(true);
 
     const togglePastFuture = () => {
         setToggle(!toggle);
@@ -28,34 +22,39 @@ function PlayerCalendarPage() {
             <button onClick={togglePastFuture}>Toggle</button>
             {toggle ?
                 <>
-                    <p>Past Games</p>
+                    <h3>Past Games</h3>
                     <div>
                         {pastGames.map((game, index) => (
                             <div key={index}>
-                                {game.home_team_score == -1 || game.away_team_score == -1 ?
-                                    <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} [x] - [x] {game.away_team_name}</p> :
-                                    <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} {game.home_team_score} - {game.away_team_score} {game.away_team_name}</p>}
+                                <AdminPastGamesItem game={game} />
                             </div>
                         ))}
                     </div>
                     <p>[x] - score has not yet been entered</p>
+                    <p><b>Note: Make sure there's a confirmation for the Save! Not allowing any undo's for now</b></p>
                 </>
                 :
                 <>
-                    <p>Upcoming Games</p>
+                    <h3>Upcoming Games</h3>
                     <div>
                         {upcomingGames.map((game, index) => (
                             <div key={index}>
-                                <PlayerUpcomingGamesItem game={game} />
+                                <AdminUpcomingGamesItem game={game} />
                             </div>
                         ))}
                     </div>
+                    <h3>Add New Game to Schedule:</h3>
+                    <AdminSchedulingForm />
+                    <Link to='/adminannouncements'><h3>Announcements Page</h3></Link>
                 </>
             }
         </div >
     );
 }
 
-export default PlayerCalendarPage;
+export default AdminSchedulePage;
+
+
+
 
 
