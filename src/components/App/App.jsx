@@ -26,12 +26,14 @@ import PlayerCalendarPage from '../PlayerCalendarPage/PlayerCalendarPage';
 import PlayerHomePage from '../PlayerHomePage/PlayerHomePage';
 import PlayerGameDetailsPage from '../PlayerGameDetailsPage/PlayerGameDetailsPage';
 import PlayerAnnouncementsPage from '../PlayerAnnouncementsPage/PlayerAnnouncementsPage';
+import PlayerTeamRankingsPage from '../PlayerTeamStandingsPage/PlayerTeamStandingsPage';
 // and the admin pages!
 import AdminHomePage from '../AdminHomePage/AdminHomePage';
 import AdminAnnouncementsPage from '../AdminAnnouncementsPage/AdminAnnouncementsPage';
+import AdminSchedulePage from '../AdminSchedulePage/AdminSchedulePage';
 
 import './App.css';
-import AdminSchedulePage from '../AdminSchedulePage/AdminSchedulePage';
+import AdminTeamCreationPage from '../AdminTeamCreationPage/AdminTeamCreationPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,8 +43,9 @@ function App() {
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
     dispatch({ type: 'FETCH_GAMES' });
-    // dispatch({ type: 'FETCH_PROFILES' })
-    dispatch({ type: 'FETCH_ANNOUNCEMENTS' })
+    dispatch({ type: 'FETCH_PLAYERS' });
+    dispatch({ type: 'FETCH_TEAMS' });
+    dispatch({ type: 'FETCH_ANNOUNCEMENTS' });
   }, [dispatch]);
 
   return (
@@ -115,6 +118,14 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
+            // logged in shows PlayerAnnouncementsPage else shows LoginPage
+            exact
+            path="/playerteamrankings"
+          >
+            <PlayerTeamRankingsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
             // logged in shows AdminHomePage else shows LoginPage
             exact
             path="/adminhome"
@@ -136,6 +147,14 @@ function App() {
             path="/adminannouncements"
           >
             <AdminAnnouncementsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AdminTeamCreationPage else shows LoginPage
+            exact
+            path="/adminteamcreation"
+          >
+            <AdminTeamCreationPage />
           </ProtectedRoute>
 
           <ProtectedRoute

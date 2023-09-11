@@ -33,23 +33,31 @@ function Nav() {
             </Link>
 
             <Link className="navLink" to="/playercalendar">
-              Player Calendar
+              Player: Calendar
             </Link>
 
             <Link className="navLink" to="/playerannouncements">
-              Player Announcements
+              Player: Announcements
+            </Link>
+
+            <Link className="navLink" to="/playerteamrankings">
+              Player: Team Standings
             </Link>
 
             <Link className="navLink" to="/adminhome">
-              Admin Home
+              Admin: Home
             </Link>
 
             <Link className="navLink" to="/adminschedule">
-              Admin Schedule
+              Admin: Schedule
             </Link>
 
             <Link className="navLink" to="/adminannouncements">
-              Admin Announcements
+              Admin: Announcements
+            </Link>
+
+            <Link className="navLink" to="/adminteamcreation">
+              Admin: Team Creation
             </Link>
 
             <Link className="navLink" to="/weather">

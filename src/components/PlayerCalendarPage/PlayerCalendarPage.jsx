@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import PlayerUpcomingGamesItem from "./PlayerUpcomingGamesItem";
 
 // Page at '/playercalendar'
 
 function PlayerCalendarPage() {
 
-    const dispatch = useDispatch();
-
     const upcomingGames = useSelector(store => store.games.upcomingGames);
     const pastGames = useSelector(store => store.games.pastGames);
 
     const [toggle, setToggle] = useState(false);
-
-    // getting rid of this useEffect since App.jsx has it already
-    // useEffect(() => {
-    //     dispatch({ type: 'FETCH_GAMES' })
-    // }, [dispatch])
 
     const togglePastFuture = () => {
         setToggle(!toggle);
@@ -25,6 +18,7 @@ function PlayerCalendarPage() {
 
     return (
         <div className="container">
+            
             <button onClick={togglePastFuture}>Toggle</button>
             {toggle ?
                 <>

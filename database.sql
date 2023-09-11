@@ -19,7 +19,8 @@ CREATE TABLE "team" (
   "wins" INTEGER NOT NULL DEFAULT 0,
   "losses" INTEGER NOT NULL DEFAULT 0,
   "draws" INTEGER NOT NULL DEFAULT 0,
-  "total_points" INTEGER GENERATED ALWAYS AS (("wins" * 3) + ("draws" * 1)) STORED
+  "total_points" INTEGER GENERATED ALWAYS AS (("wins" * 3) + ("draws" * 1)) STORED,
+  "goal_differential" INTEGER DEFAULT 0
 );
 
 CREATE TABLE "user" (

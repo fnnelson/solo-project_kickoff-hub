@@ -3,6 +3,8 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import gamesSaga from './games.saga';
+import playersSaga from './players.saga';
+import teamsSaga from './teams.saga';
 import announcementsSaga from './announcements.saga';
 
 // rootSaga is the primary saga.
@@ -18,6 +20,8 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     gamesSaga(),
+    playersSaga(),
+    teamsSaga(),
     announcementsSaga(),
   ]);
 }

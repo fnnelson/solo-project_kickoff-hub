@@ -31,7 +31,6 @@ function AdminSchedulePage() {
                         ))}
                     </div>
                     <p>[x] - score has not yet been entered</p>
-                    <p><b>Note: Make sure there's a confirmation for the Save! Not allowing any undo's for now</b></p>
                 </>
                 :
                 <>

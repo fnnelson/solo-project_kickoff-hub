@@ -6,8 +6,6 @@ function AdminUpcomingGamesItem({ game }) {
 
     const dispatch = useDispatch();
 
-    // const [toggleCancelGame, setToggleCancelGame] = useState(true);
-
     const handleDelete = (gameId) => {
         // console.log("inside handleDelete", gameId)
         axios.delete(`/api/game/${gameId}`)
@@ -22,9 +20,6 @@ function AdminUpcomingGamesItem({ game }) {
 
     const handleCancelGame = (gameId) => {
         // console.log("inside handleCancelGame")
-        // let cancelObj = {
-        //     cancelStatus: toggleCancelGame
-        // }
         axios.put(`/api/game/cancel/${gameId}`)
             .then(response => {
                 console.log("updated cancel/game on", response)
@@ -33,7 +28,6 @@ function AdminUpcomingGamesItem({ game }) {
             .catch(error => {
                 console.log("error with PUT client side", error)
             })
-        // setToggleCancelGame(!toggleCancelGame)
     }
 
 
