@@ -23,7 +23,9 @@ router.get('/', (req, res) => {
         END AS day_of_week,
         TO_CHAR(game.game_time, 'HH:MI pm') AS game_time,
         game.cancel_status,
+        game.home_team_id,
         game.home_team_score,
+        game.away_team_id,
         game.away_team_score,
         home_team.team_name AS home_team_name,
         home_team.home_jersey,
@@ -137,15 +139,73 @@ router.post('/', (req, res) => {
 
 
 /**
- * PUT - changing scores here!
+ * PUT 1/2 - changing scores here!
  */
 router.put('/score/:id', (req, res) => {
     console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
-    const queryParams = [req.params.id, req.body.homeScore, req.body.awayScore];
+    const queryParams = [
+        req.params.id, // $1
+        req.body.homeScore, // $2
+        req.body.awayScore, // $3
+        req.body.homeResult, // $4
+        req.body.awayResult, // $5
+    ];
     const sqlText = `
     UPDATE "game"
-    SET "home_team_score" = $2, "away_team_score" = $3
+    SET "home_team_score" = $2, "away_team_score" = $3, "home_team_result" = $4, "away_team_result" = $5 
     WHERE "id" = $1;
+    `;
+    pool.query(sqlText, queryParams)
+        .then(result => {
+            res.sendStatus(200);
+        })
+        .catch(error => {
+            console.log("error on PUT of scores", error);
+            res.sendStatus(500);
+        })
+});
+
+/**
+ * PUT 2/2 - changing team results here!
+ */
+router.put('/result/:id', (req, res) => {
+    console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
+    const queryParams = [
+        req.body.homeResult, // $1
+        req.body.awayResult, // $2
+        req.body.homeTeamId, // $3
+        req.body.awayTeamId // $4
+    ];
+    const sqlText = `
+    UPDATE "team"
+SET
+    "wins" = CASE
+        WHEN $1 = 'W' THEN
+            CASE
+                WHEN $2 = 'W' THEN "wins" + 1
+                ELSE "wins"
+            END
+        ELSE "wins"
+    END,
+    "losses" = CASE
+        WHEN $1 = 'L' THEN
+            CASE
+                WHEN $2 = 'L' THEN "losses" + 1
+                ELSE "losses"
+            END
+        ELSE "losses"
+    END,
+    "draws" = CASE
+        WHEN $1 = 'D' THEN
+            CASE
+                WHEN $2 = 'D' THEN "draws" + 1
+                ELSE "draws"
+            END
+        ELSE "draws"
+    END
+WHERE ($1 = 'W' OR $1 = 'L' OR $1 = 'D')
+  AND ($2 = 'W' OR $2 = 'L' OR $2 = 'D')
+  AND id IN ($3, $4);
     `;
     pool.query(sqlText, queryParams)
         .then(result => {

@@ -27,18 +27,44 @@ function AdminPastGamesItem({ game }) {
         } else if (homeTeamScore == '' && awayTeamScore == '') {
             setEditToggle(false);
         } else {
+            let homeTeamResult;
+            let awayTeamResult;
+            if (homeTeamScore > awayTeamScore) {
+                homeTeamResult = 'W';
+                awayTeamResult = 'L'
+            } else if (homeTeamScore < awayTeamScore) {
+                homeTeamResult = 'L'
+                awayTeamResult = 'W';
+            } else if (homeTeamScore == awayTeamScore) {
+                homeTeamResult = awayTeamResult = 'D';
+            }
             let gameId = game.id;
             let updatedScoreObj = {
                 homeScore: Number(homeTeamScore),
-                awayScore: Number(awayTeamScore)
+                awayScore: Number(awayTeamScore),
+                homeResult: homeTeamResult,
+                awayResult: awayTeamResult,
+                homeTeamId: game.home_team_id,
+                awayTeamId: game.away_team_id,
             };
+            // 1st PUT request to update "game" table
             axios.put(`/api/game/score/${gameId}`, updatedScoreObj)
                 .then(response => {
-                    console.log("PUT successful!", response);
+                    console.log("1st PUT successful!", response);
                     dispatch({ type: 'FETCH_GAMES' })
                 })
                 .catch(error => {
-                    console.error("PUT ain't PUTtin", error);
+                    console.error("1st PUT ain't PUTtin", error);
+                });
+
+            // 2nd PUT request to update "team" table
+            axios.put(`/api/game/result/${gameId}`, updatedScoreObj)
+                .then(response => {
+                    console.log("2nd PUT successful!", response);
+                    dispatch({ type: 'FETCH_GAMES' })
+                })
+                .catch(error => {
+                    console.error("2nd PUT ain't PUTtin", error);
                 })
             setEditToggle(false);
         }

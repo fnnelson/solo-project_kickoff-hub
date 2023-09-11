@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import AdminPastGamesItem from "./AdminPastGamesItem";
 import AdminUpcomingGamesItem from "./AdminUpcomingGamesItem";
@@ -7,17 +7,10 @@ import AdminSchedulingForm from "./AdminSchedulingForm";
 
 function AdminSchedulePage() {
 
-    const dispatch = useDispatch();
-
     const upcomingGames = useSelector(store => store.games.upcomingGames);
     const pastGames = useSelector(store => store.games.pastGames);
 
     const [toggle, setToggle] = useState(true);
-
-    // getting rid of this useEffect since App.jsx has it already
-    // useEffect(() => {
-    //     dispatch({ type: 'FETCH_GAMES' })
-    // }, [dispatch])
 
     const togglePastFuture = () => {
         setToggle(!toggle);
