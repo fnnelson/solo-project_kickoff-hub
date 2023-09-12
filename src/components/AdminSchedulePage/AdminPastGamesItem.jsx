@@ -69,7 +69,7 @@ function AdminPastGamesItem({ game }) {
         <div>
             {game.cancel_status ? (
                 <p style={{ backgroundColor: 'lightgray' }}>
-                    **GAME CANCELLED** <s>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} N/A - N/A {game.away_team_name}</s> **GAME CANCELLED**
+                    **GAME CANCELED** <s>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} N/A - N/A {game.away_team_name}</s> **GAME CANCELED**
                 </p>
             ) : (editToggle ? (
                 game.home_team_score === -1 || game.away_team_score === -1 ? (

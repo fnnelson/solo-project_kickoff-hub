@@ -202,14 +202,14 @@ WHERE "id" = $1;
 });
 
 /**
- * PUT - updating whether a game is cancelled!
+ * PUT - updating whether a game is cancelled! Flipping boolean of cancel_status for specific game ID
  */
 router.put('/cancel/:id', (req, res) => {
-    console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
-    const queryParams = [req.params.id, req.body.cancelStatus];
+    // console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
+    const queryParams = [req.params.id];
     const sqlText = `
     UPDATE "game"
-    SET "cancel_status" = $2
+    SET "cancel_status" = NOT "cancel_status"
     WHERE "id" = $1;
     `;
     pool.query(sqlText, queryParams)

@@ -31,7 +31,6 @@ function AdminSchedulePage() {
                         ))}
                     </div>
                     <p>[x] - score has not yet been entered</p>
-                    <p><b>Note: Make sure there's a confirmation for the Save! Not allowing any undo's for now</b></p>
                 </>
                 :
                 <>
@@ -43,9 +42,9 @@ function AdminSchedulePage() {
                             </div>
                         ))}
                     </div>
+                    <Link to='/adminannouncements'><h4>Add announcement if canceling game</h4></Link>
                     <h3>Add New Game to Schedule:</h3>
                     <AdminSchedulingForm />
-                    <Link to='/adminannouncements'><h3>Announcements Page</h3></Link>
                 </>
             }
         </div >
