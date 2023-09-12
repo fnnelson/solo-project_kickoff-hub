@@ -10,8 +10,9 @@ function AdminTeamCreationPage() {
     // console.log("players are", allPlayers);
     // console.log("teams are", allTeams);
 
-
-/** 1. Calculate the count of players for each team
+/** 
+ *  Explanation of the below:
+ *  1. Calculate the count of players for each team
     2. The reduce function is used to transform an array into a single value. In this case, it's used to calculate the player count for each team.
     (counts, team) => This is an arrow function passed to reduce. It takes two parameters: counts (an accumulator) and team (the current team object being processed).
     4. counts[team.id] = This line updates the counts object with the player count for the current team. It uses the team's id as the key in the counts object. This key-value pair will represent the team's ID and the count of players assigned to that team.
@@ -21,7 +22,6 @@ function AdminTeamCreationPage() {
     6. return counts;: This line returns the updated counts object after processing the current team. The reduce function will accumulate these counts for all teams into a single object.
     7. }, {});: This is the closing part of the reduce function. It initializes the counts object as an empty object {}. This is the initial value of the accumulator.
  */
-
     const teamPlayerCounts = allTeams.reduce((counts, team) => {
         counts[team.id] = allPlayers.filter((player) => player.team_id === team.id).length;
         return counts;
@@ -35,7 +35,7 @@ function AdminTeamCreationPage() {
                     <div>
                         {allTeams.map((team, index) => (
                             <div key={index}>
-                                <p>{team.team_name}, Players: <b>{teamPlayerCounts[team.id]}</b></p>
+                                <p><b>{team.team_name}</b>, players #: <b>{teamPlayerCounts[team.id]}</b></p>
                                 {allPlayers.map((player, playerIndex) => (
                                     player.team_id === team.id ? (
                                         <span key={playerIndex}>{player.username || player.name} </span>

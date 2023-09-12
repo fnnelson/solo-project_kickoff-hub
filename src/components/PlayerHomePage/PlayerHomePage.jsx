@@ -11,11 +11,6 @@ function PlayerHome() {
 
     const [nextGame, setNextGame] = useState('');
 
-    // getting rid of this useEffect since App.jsx has it already
-    // useEffect(() => {
-    //     dispatch({ type: 'FETCH_GAMES' });
-    // }, [dispatch])
-
     console.log('upcomingGames[0] is:', upcomingGames[0])
 
     useEffect(() => {
