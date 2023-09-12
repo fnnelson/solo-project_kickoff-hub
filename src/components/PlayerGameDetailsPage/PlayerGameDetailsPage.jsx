@@ -67,10 +67,10 @@ function PlayerGameDetailsPage() {
                     <h4>{gameDetails.field_name}</h4>
                     <h5>{gameDetails.address}</h5>
                     <h3>{gameDetails.game_date} @ {gameDetails.game_time}</h3>
-                    <p>Jersey color {gameDetails.home_jersey}</p>
+                    <p>Home - Jersey color {gameDetails.home_jersey}</p>
                     <p>{gameDetails.home_team_name} {gameDetails.home_team_wins}-{gameDetails.home_team_losses}-{gameDetails.home_team_draws}</p>
                     <p>vs.</p>
-                    <p>Jersey color {gameDetails.away_jersey}</p>
+                    <p>Away - Jersey color {gameDetails.away_jersey}</p>
                     <p>{gameDetails.away_team_name} {gameDetails.away_team_wins}-{gameDetails.away_team_losses}-{gameDetails.away_team_draws}</p>
                 </div>
             ) : (
