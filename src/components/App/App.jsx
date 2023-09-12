@@ -46,7 +46,10 @@ function App() {
     dispatch({ type: 'FETCH_PLAYERS' });
     dispatch({ type: 'FETCH_TEAMS' });
     dispatch({ type: 'FETCH_ANNOUNCEMENTS' });
-  }, [dispatch]);
+    if (user.team_id) {
+      dispatch({ type: 'FETCH_USER_GAMES', payload: user.team_id });
+    }
+  }, [dispatch, user.team_id]);
 
   return (
     <Router>

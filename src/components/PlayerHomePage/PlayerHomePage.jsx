@@ -1,32 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 function PlayerHome() {
-    const dispatch = useDispatch();
     const history = useHistory();
 
     const user = useSelector((store) => store.user);
-    const upcomingGames = useSelector(store => store.games.upcomingGames);
+    const upcomingUserGames = useSelector(store => store.games.upcomingUserGames);
 
     const [nextGame, setNextGame] = useState('');
 
-    console.log('upcomingGames[0] is:', upcomingGames[0])
-
     useEffect(() => {
-        if (upcomingGames.length > 0) {
-            console.log('upcomingGames[0] is:', upcomingGames[0]);
-            let longDate = new Date(upcomingGames[0].game_date)
+        if (upcomingUserGames.length > 0) {
+            console.log('upcomingUserGames[0] is:', upcomingUserGames[0]);
+            let longDate = new Date(upcomingUserGames[0].game_date)
             let month = longDate.getMonth() + 1; // since it goes 0-11
             let day = longDate.getDate();
             let nextGameShortDate = `${month}/${day}`; // to show short-hand on Home Page
-            upcomingGames[0].game_date = nextGameShortDate
-            setNextGame(upcomingGames[0]);
+            upcomingUserGames[0].game_date = nextGameShortDate
+            setNextGame(upcomingUserGames[0]);
         }
-    }, [upcomingGames]);
+    }, [upcomingUserGames]);
 
-    if (!nextGame) {
-        return <div><p>Loading...</p></div>
+    if (!user.team_id) {
+        return <div>
+            <h2>*Team not yet assigned*</h2>
+            <p>Teams assigned one week prior to season start.  If within one week and no team assignment, contact admin.</p>
+        </div>
+    } else if (!nextGame) {
+        return <div><p>No Upcoming Games</p></div>
     }
 
     const goToNextGameDetails = () => {

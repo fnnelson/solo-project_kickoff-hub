@@ -6,8 +6,8 @@ import PlayerUpcomingGamesItem from "./PlayerUpcomingGamesItem";
 
 function PlayerCalendarPage() {
 
-    const upcomingGames = useSelector(store => store.games.upcomingGames);
-    const pastGames = useSelector(store => store.games.pastGames);
+    const upcomingUserGames = useSelector(store => store.games.upcomingUserGames);
+    const pastUserGames = useSelector(store => store.games.pastUserGames);
 
     const [toggle, setToggle] = useState(false);
 
@@ -18,13 +18,13 @@ function PlayerCalendarPage() {
 
     return (
         <div className="container">
-            
+
             <button onClick={togglePastFuture}>Toggle</button>
             {toggle ?
                 <>
                     <p>Past Games</p>
                     <div>
-                        {pastGames.map((game, index) => (
+                        {pastUserGames.map((game, index) => (
                             <div key={index}>
                                 {game.home_team_score == -1 || game.away_team_score == -1 ?
                                     <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} [x] - [x] {game.away_team_name}</p> :
@@ -37,13 +37,17 @@ function PlayerCalendarPage() {
                 :
                 <>
                     <p>Upcoming Games</p>
-                    <div>
-                        {upcomingGames.map((game, index) => (
-                            <div key={index}>
-                                <PlayerUpcomingGamesItem game={game} />
-                            </div>
-                        ))}
-                    </div>
+                    {upcomingUserGames ?
+                        <div>
+                            {upcomingUserGames.map((game, index) => (
+                                <div key={index}>
+                                    <PlayerUpcomingGamesItem game={game} />
+                                </div>
+                            ))}
+                        </div>
+                        :
+                        <p>No upcoming games</p>
+                    }
                 </>
             }
         </div >

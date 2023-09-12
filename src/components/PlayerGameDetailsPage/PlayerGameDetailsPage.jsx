@@ -39,8 +39,6 @@ function PlayerGameDetailsPage() {
             })
     }
 
-    console.log('gameDetails is now:', gameDetails)
-
     return (
         <div className="container">
             {gameDetails ? (
