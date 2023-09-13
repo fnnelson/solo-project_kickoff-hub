@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
+// import './NavBottom.css';
 import { useSelector } from 'react-redux';
 
-function Nav() {
+import { Box } from '@chakra-ui/react';
+
+
+function NavBottom({ toggleAdminMode, isAdminMode }) {
   const user = useSelector((store) => store.user);
 
   return (
@@ -22,7 +24,7 @@ function Nav() {
         )}
 
         {/* If a user is logged in, show these links */}
-        {user.id && (
+        {user.id && !isAdminMode && (
           <>
             <Link className="navLink" to="/playerhome">
               Home
@@ -44,6 +46,18 @@ function Nav() {
               Player: Team Standings
             </Link>
 
+            {user.admin && (
+              <Link to='/adminhome'>
+                <button className="navButton" onClick={toggleAdminMode} >
+                  Admin Mode
+                </button>
+              </Link>
+            )}
+          </>
+        )}
+
+        {isAdminMode && user.admin && (
+          <>
             <Link className="navLink" to="/adminhome">
               Admin: Home
             </Link>
@@ -60,20 +74,16 @@ function Nav() {
               Admin: Team Creation
             </Link>
 
-            <Link className="navLink" to="/weather">
-              *Weather(API test)*
+            <Link to='/playerhome'>
+              <button className="navButton" onClick={toggleAdminMode}>
+                Player Mode
+              </button>
             </Link>
-
-            <LogOutButton className="navLink" />
           </>
         )}
-
-        <Link className="navLink" to="/about">
-          About
-        </Link>
       </div>
-    </div>
+    </div >
   );
 }
 
-export default Nav;
+export default NavBottom;

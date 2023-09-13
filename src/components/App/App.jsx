@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   HashRouter as Router,
   Redirect,
@@ -8,7 +8,8 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import Nav from '../Nav/Nav';
+import NavTop from '../Nav/NavTop';
+import NavBottom from '../Nav/NavBottom';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -31,12 +32,18 @@ import PlayerTeamRankingsPage from '../PlayerTeamStandingsPage/PlayerTeamStandin
 import AdminHomePage from '../AdminHomePage/AdminHomePage';
 import AdminAnnouncementsPage from '../AdminAnnouncementsPage/AdminAnnouncementsPage';
 import AdminSchedulePage from '../AdminSchedulePage/AdminSchedulePage';
+import AdminTeamCreationPage from '../AdminTeamCreationPage/AdminTeamCreationPage';
 
 import './App.css';
-import AdminTeamCreationPage from '../AdminTeamCreationPage/AdminTeamCreationPage';
 
 function App() {
   const dispatch = useDispatch();
+
+  const [isAdminMode, setIsAdminMode] = useState(false);
+
+  const toggleAdminMode = () => {
+    setIsAdminMode(!isAdminMode);
+  };
 
   const user = useSelector(store => store.user);
 
@@ -54,7 +61,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        <NavTop isAdminMode={isAdminMode} />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -217,6 +224,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
+        <NavBottom toggleAdminMode={toggleAdminMode} isAdminMode={isAdminMode} />
       </div>
     </Router>
   );
