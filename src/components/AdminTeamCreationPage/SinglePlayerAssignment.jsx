@@ -34,7 +34,7 @@ function SinglePlayerAssignment({ player, allTeams }) {
         <div>
             Player: {player.name ? player.name : player.username}, {player.team_name || 'No team assigned'}
             <select value={selectedTeam} onChange={(event) => setSelectedTeam(event.target.value)}>
-                <option value="">No team</option>
+                <option style={{backgroundColor: 'pink'}} value="">No team</option>
                 {allTeams.map((team) => (
                     <option key={team.id} value={team.id}>
                         {team.team_name}

@@ -14,6 +14,6 @@ function LogOutButton(props) {
       Log Out
     </button>
   );
-}
+};
 
 export default LogOutButton;
