@@ -62,7 +62,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Flex as='div' flexDirection='column' >
+        <Flex as='div' flexDirection='column' minH='100vh'>
           <NavTop isAdminMode={isAdminMode} />
           <Box overflowY='auto' maxH='calc(100vh - 50px)' mt='50px'>
             <Switch>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { Box, Button, Card, CardBody, Heading, Stack, Tabs, Text, Textarea } from '@chakra-ui/react';
 
 // Page at '/adminannouncements'
 
@@ -45,20 +46,14 @@ function AdminAnnouncementsPage() {
             })
     }
 
-    const announcementStyle = {
-        border: '2px solid black',
-        padding: '5px',
-        margin: '25px',
-    };
-
     return (
         <div className="container">
-            <p>Admin Announcements Page</p>
+            <Heading fontSize='md' >Admin Announcements Page</Heading>
 
             <form onSubmit={handleAddAnnouncement}>
-                <textarea
+                <Textarea
                     type="text"
-                    style={{ minHeight: '100px', width: '400px' }}
+                    style={{ minHeight: '100px', width: '100%' }}
                     placeholder='type new announcement...'
                     value={newAnnouncement}
                     onChange={(event) => setNewAnnouncement(event.target.value)}
@@ -66,17 +61,25 @@ function AdminAnnouncementsPage() {
                         event.target.style.height = 'auto';
                         event.target.style.height = event.target.scrollHeight + 'px';
                     }}
-                ></textarea>
-                <button style={{ margin: '5px' }} type='submit'>Add</button>
+                ></Textarea>
+                <Box textAlign='right'>
+                    <Button m='5px' type='submit'>Add</Button>
+                </Box>
             </form>
 
-            <div style={announcementStyle}>
-                {allAnnouncements.map((item, index) => (
-                    <div key={index} style={announcementStyle}>
-                        <p><button onClick={() => handleDeleteAnnouncement(item)}>Delete</button> {item.date}: {item.description}</p>
-                    </div>
-                ))}
-            </div>
+            <Box>
+                <Stack>
+                    {allAnnouncements.map((item, index) => (
+                        <Card key={index} variant='elevated'>
+                            <CardBody>
+                                <Text>
+                                    <Button onClick={() => handleDeleteAnnouncement(item)}>Delete</Button> {item.date}: {item.description}
+                                </Text>
+                            </CardBody>
+                        </Card>
+                    ))}
+                </Stack>
+            </Box>
         </div >
     );
 }

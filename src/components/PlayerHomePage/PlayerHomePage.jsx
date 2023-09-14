@@ -1,6 +1,14 @@
+import { AbsoluteCenter, Box, Card, CardBody, CardFooter, CardHeader, Divider, Flex, Grid, GridItem, HStack, Heading, Stack, StackDivider, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShirt } from '@fortawesome/free-solid-svg-icons'
+
+const getShirtIconStyle = (color) => ({
+    color: color, // setting the icon color to the provided hex code
+});
 
 function PlayerHome() {
     const history = useHistory();
@@ -23,10 +31,10 @@ function PlayerHome() {
     }, [upcomingUserGames]);
 
     if (!user.team_id) {
-        return <div>
-            <h2>*Team not yet assigned*</h2>
-            <p>Teams assigned one week prior to season start.  If within one week and no team assignment, contact admin.</p>
-        </div>
+        return <Box p='40px' justifyContent='center'>
+            <Text fontSize='xl' m='25px'>*Team not yet assigned*</Text>
+            <Text>Teams assigned one week prior to season start.  If within one week and no team assignment, it's recommended to contact the admin to confirm registration status.</Text>
+        </Box>
     } else if (!nextGame) {
         return <div><p>No Upcoming Games</p></div>
     }
@@ -37,54 +45,59 @@ function PlayerHome() {
 
     return (
         <div className="container">
-            <h3>Profile Button/Preview Here?</h3>
-            {user.name ? <h2>Hello, {user.name}!</h2> : <h2>Hello, {user.username}!</h2>}
+            <Flex direction='column'>
+                <Box h='100px'>
+                    <h3>Profile Button/Preview Here?</h3>
 
-            {nextGame.cancel_status ? (
-                <div className="next-game"
-                    style={{
-                        border: '2px solid red',
-                        padding: '10px',
-                        backgroundColor: 'pink',
-                        display: 'inline-block',
-                        cursor: 'pointer'
-                    }}
-                    onClick={goToNextGameDetails}>
-                    <h2>GAME CANCELED</h2>
-                    <p>
-                        Home - {nextGame.home_team_name} - Jersey color ({nextGame.home_jersey})
-                    </p>
-                    <p>vs.</p>
-                    <p>
-                        Away - {nextGame.away_team_name} - Jersey color ({nextGame.away_jersey})
-                    </p>
-                    <p>
-                        {nextGame.day_of_week} {nextGame.game_date} {nextGame.game_time} @ {nextGame.field_name}
-                    </p>
-                </div>
-            ) : (
-                <div className="next-game"
-                    style={{
-                        border: '2px solid #000',
-                        padding: '10px',
-                        backgroundColor: 'lightgray',
-                        display: 'inline-block',
-                        cursor: 'pointer'
-                    }}
-                    onClick={goToNextGameDetails}>
-                    <h2>NEXT GAME</h2>
-                    <p>
-                        Home - {nextGame.home_team_name} - Jersey color ({nextGame.home_jersey})
-                    </p>
-                    <p>vs.</p>
-                    <p>
-                        Away - {nextGame.away_team_name} - Jersey color ({nextGame.away_jersey})
-                    </p>
-                    <p>
-                        {nextGame.day_of_week} {nextGame.game_date} {nextGame.game_time} @ {nextGame.field_name}
-                    </p>
-                </div>
-            )}
+                    {user.name ? <Heading>Hello, {user.name}!</Heading> : <h2>Hello, {user.username}!</h2>}
+                </Box>
+                <Box flex='1'>
+                    <Card
+                        align='center'
+                        style={{
+                            backgroundColor: nextGame.cancel_status ? 'pink' : '#f7f7f7',
+                            border: '2px solid gray',
+                            cursor: 'pointer'
+                        }}
+                        onClick={goToNextGameDetails}
+                    >
+                        <CardHeader>
+                            {nextGame.cancel_status ? <Heading size='md' align='center'>GAME CANCELED</Heading> : <Heading size='md' align='center'>NEXT GAME</Heading>}
+
+                        </CardHeader>
+                        <CardBody>
+                            <HStack spacing='6'>
+                                <Stack align='center'>
+                                    <Heading size='xs'>Home</Heading>
+                                    <Text align='center'>{nextGame.home_team_name}</Text>
+                                    <Text align='center' fontSize='4xl'>
+                                        <FontAwesomeIcon
+                                            icon={faShirt}
+                                            style={getShirtIconStyle(nextGame.home_jersey)}
+                                        />
+                                    </Text>
+                                </Stack>
+                                <Text m='5px'>vs.</Text>
+                                <Stack align='center'>
+                                    <Heading size='xs'>Away</Heading>
+                                    <Text align='center'>{nextGame.away_team_name}</Text>
+                                    <Text align='center' fontSize='4xl'>
+                                        <FontAwesomeIcon
+                                            icon={faShirt}
+                                            style={getShirtIconStyle(nextGame.away_jersey)}
+                                        />
+                                    </Text>
+                                </Stack>
+                            </HStack>
+                            <Divider my='5px' />
+                        </CardBody>
+                        <Stack align='center'>
+                            <Text>{nextGame.day_of_week} {nextGame.game_date}</Text>
+                            <Text>{nextGame.game_time} @ {nextGame.field_name}</Text>
+                        </Stack>
+                    </Card>
+                </Box>
+            </Flex>
         </div >
     );
 }
