@@ -49,7 +49,7 @@ function PlayerHome() {
                 <StackItem h='150px' >
                     <Box>
                         <Box fontSize='xl' my='15px' >
-                            <FontAwesomeIcon icon={faCircleUser} size="xl" color='#383838'/>
+                            <FontAwesomeIcon icon={faCircleUser} size="xl" color='#383838' />
                         </Box>
                         {user.name ? <Heading color='#f7f7f7' textShadow='0 0 5px #383838'>Hello, {user.name}!</Heading> : <Heading color='#f7f7f7' textShadow='0 0 3px #383838'>Hello, {user.username}!</Heading>}
                     </Box>
@@ -60,9 +60,8 @@ function PlayerHome() {
                             align='center'
                             style={{
                                 backgroundColor: nextGame.cancel_status ? 'pink' : '#f7f7f7',
-                                border: '2px solid #383838',
-                                cursor: 'pointer'
                             }}
+                            border='2px solid #383838'
                             onClick={goToNextGameDetails}
                         >
                             <CardHeader >

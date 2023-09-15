@@ -1,10 +1,26 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFutbol } from "@fortawesome/free-solid-svg-icons";
+import { Text } from "@chakra-ui/react";
+
+const winnerIcon = <FontAwesomeIcon icon={faFutbol} />
 
 function PlayerPastGamesItem({ game }) {
     return <>
-        {game.home_team_score == -1 || game.away_team_score == -1 ?
-            <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} [x] - [x] {game.away_team_name}</p> :
-            <p>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} {game.home_team_score} - {game.away_team_score} {game.away_team_name}</p>}
+        {game.home_team_score == -1 || game.away_team_score == -1 ? (
+            <>
+                <Text>{game.day_of_week}, {game.game_date} at {game.game_time}</Text>
+                <Text>{game.home_team_name} <b>[x]</b></Text>
+                <Text>{game.away_team_name} <b>[x]</b></Text>
+            </>
+        ) : (
+            <>
+                <Text>{game.day_of_week}, {game.game_date} at {game.game_time}</Text>
+                <Text>{game.home_team_name} <b>{game.home_team_score}</b> {game.home_team_result == 'W' && winnerIcon}</Text>
+                <Text>{game.away_team_name} <b>{game.away_team_score} {game.away_team_result == 'W' && winnerIcon}</b></Text>
+            </>
+
+        )}
     </>;
 }
 

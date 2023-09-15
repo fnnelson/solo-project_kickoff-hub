@@ -6,16 +6,13 @@ import { useSelector } from 'react-redux';
 import { Box, Flex, Center } from '@chakra-ui/react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse, faCalendarDays, faTrophy, faClipboardQuestion, faFutbol, faBullhorn, faRepeat, faCalendarPlus, faPeopleGroup, faPenToSquare, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faCalendarDays, faTrophy, faClipboardQuestion, faBullhorn, faRepeat, faPeopleGroup, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const homeIcon = <FontAwesomeIcon icon={faHouse} />
 const calendarIcon = <FontAwesomeIcon icon={faCalendarDays} />
 const trophyIcon = <FontAwesomeIcon icon={faTrophy} />
 const faqIcon = <FontAwesomeIcon icon={faClipboardQuestion} />
-// const ballIcon = <FontAwesomeIcon icon={faFutbol} />
 const switchIcon = <FontAwesomeIcon icon={faRepeat} />
-const editIcon = <FontAwesomeIcon icon={faPenToSquare} />
-const calendarPlusIcon = <FontAwesomeIcon icon={faCalendarPlus} />
 const teamIcon = <FontAwesomeIcon icon={faPeopleGroup} />
 const bullhornIcon = <FontAwesomeIcon icon={faBullhorn} />
 const plusIcon = <FontAwesomeIcon icon={faPlus} />

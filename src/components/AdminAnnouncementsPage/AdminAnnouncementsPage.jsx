@@ -96,12 +96,12 @@ function AdminAnnouncementsPage() {
                             <CardBody>
                                 <Text>
                                     <b>{item.date}</b>: {item.description}
-                                    <Box textAlign='right'>
-                                        <IconButton border='2px solid pink'>
-                                            <FontAwesomeIcon icon={faTrashCan} onClick={() => handleDeleteAnnouncement(item)} color='black' />
-                                        </IconButton>
-                                    </Box>
                                 </Text>
+                                <Box textAlign='right'>
+                                    <IconButton border='2px solid pink'>
+                                        <FontAwesomeIcon icon={faTrashCan} onClick={() => handleDeleteAnnouncement(item)} color='black' />
+                                    </IconButton>
+                                </Box>
                             </CardBody>
                         </Card>
                     ))}

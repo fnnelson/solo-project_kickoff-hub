@@ -2,6 +2,11 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { Box, Button, IconButton, Input, Text } from "@chakra-ui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faFloppyDisk, faFutbol } from "@fortawesome/free-solid-svg-icons";
+
+const winnerIcon = <FontAwesomeIcon icon={faFutbol} />
 
 // Page at '/adminschedule'
 
@@ -62,63 +67,102 @@ function AdminPastGamesItem({ game }) {
     }
 
     const inputStyle = {
-        width: '15px'
+        width: '60px'
     }
 
     return (
         <div>
             {game.cancel_status ? (
-                <p style={{ backgroundColor: 'lightgray' }}>
-                    **GAME CANCELED** <s>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} N/A - N/A {game.away_team_name}</s> **GAME CANCELED**
-                </p>
+                <>
+                    <Text>**GAME CANCELED**</Text>
+                    <Text><s>{game.day_of_week}, {game.game_date} at {game.game_time}</s></Text>
+                    <Text><s>{game.home_team_name} : N/A</s></Text>
+                    <Text><s>{game.away_team_name} : N/A</s></Text>
+                    <Text>**GAME CANCELED**</Text>
+                </>
             ) : (editToggle ? (
                 game.home_team_score === -1 || game.away_team_score === -1 ? (
                     <>
-                        <p style={{ backgroundColor: 'pink' }}>
-                            <button onClick={handleSave}>Save</button> **UPDATE** {game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name}{' '}
-                            <input
+                        <Text>**UPDATE**</Text>
+                        <Text>{game.day_of_week}, {game.game_date} at {game.game_time}</Text>
+                        <Text>{game.home_team_name}{' '}
+                            <Input
                                 type='text'
                                 style={inputStyle}
                                 value={homeTeamScore}
+                                bgColor='white'
+                                color='black'
                                 onChange={(event) => { setHomeTeamScore(event.target.value) }}
-                            />{' '}
-                            - <input
+                            />
+                        </Text>
+                        <Text>
+                            {game.away_team_name}
+                            <Input
                                 type='text'
                                 style={inputStyle}
                                 value={awayTeamScore}
                                 onChange={(event) => { setAwayTeamScore(event.target.value) }}
-                            /> {game.away_team_name} **UPDATE**
-                        </p>
+                            />
+                        </Text>
+                        <Text>**UPDATE**</Text>
+                        <Box textAlign='right'>
+                            <IconButton border='2px solid red'>
+                                <FontAwesomeIcon icon={faFloppyDisk} onClick={handleSave} color='black' />
+                            </IconButton>
+                        </Box>
                     </>
                 ) : (
                     <>
-                        <p>
-                            <button onClick={handleSave}>Save</button> {game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name}{' '}
-                            <input
+                        <Button onClick={handleSave}>Save</Button>
+                        <Text>
+                            {game.day_of_week}, {game.game_date} at {game.game_time}</Text>
+                        <Text>{game.home_team_name}{' '}
+                            <Input
                                 type='text'
                                 value={homeTeamScore}
                                 onChange={(event) => { setHomeTeamScore(event.target.value) }}
                                 style={inputStyle}
-                            />{' '}
-                            - <input
+                            />
+                        </Text>
+                        <Text>
+                            {game.away_team_name}
+                            <Input
                                 type='text'
                                 style={inputStyle}
                                 value={awayTeamScore}
-                                onChange={(event) => { setAwayTeamScore(event.target.value) }} /> {game.away_team_name}
-                        </p>
+                                onChange={(event) => { setAwayTeamScore(event.target.value) }}
+                            />
+                        </Text>
+                        <Box textAlign='right'>
+                            <IconButton border='2px solid #3a7259'>
+                                <FontAwesomeIcon icon={faFloppyDisk} onClick={handleSave} color='black' />
+                            </IconButton>
+                        </Box>
                     </>
                 )
             ) : game.home_team_score === -1 || game.away_team_score === -1 ? (
                 <>
-                    <p style={{ backgroundColor: 'pink' }}>
-                        <button onClick={toggleEditOption}>Edit</button> **UPDATE** {game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} [x] - [x] {game.away_team_name} **UPDATE**
-                    </p>
+                    <Text>**UPDATE**</Text>
+                    <Text>{game.day_of_week}, {game.game_date} at {game.game_time}</Text>
+                    <Text>{game.home_team_name} : <b>[x]</b></Text>
+                    <Text>{game.away_team_name} : <b>[x]</b></Text>
+                    <Text>**UPDATE**</Text>
+                    <Box textAlign='right'>
+                        <IconButton border='2px solid red' >
+                            <FontAwesomeIcon icon={faPenToSquare} onClick={toggleEditOption} color='black' />
+                        </IconButton>
+                    </Box>
                 </>
             ) : (
                 <>
-                    <p>
-                        <button onClick={toggleEditOption}>Edit</button> {game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} {game.home_team_score} - {game.away_team_score} {game.away_team_name}
-                    </p>
+                    <Text>{game.day_of_week}, {game.game_date} at {game.game_time}</Text>
+                    <Text>{game.home_team_name} : <b>{game.home_team_score}</b> {game.home_team_result == 'W' && winnerIcon}</Text>
+                    <Text>{game.away_team_name} : <b>{game.away_team_score}</b> {game.away_team_result == 'W' && winnerIcon}</Text>
+                    <Box textAlign='right'>
+                        <IconButton border='2px solid #3a7259'>
+                            <FontAwesomeIcon icon={faPenToSquare} onClick={toggleEditOption} color='black' />
+                        </IconButton>
+                    </Box>
                 </>
             ))}
         </div>

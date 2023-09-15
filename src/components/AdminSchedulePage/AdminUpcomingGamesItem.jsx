@@ -19,7 +19,7 @@ function AdminUpcomingGamesItem({ game }) {
     }
 
     const handleCancelGame = (gameId) => {
-        // console.log("inside handleCancelGame")
+        console.log("inside handleCancelGame", gameId)
         axios.put(`/api/game/cancel/${gameId}`)
             .then(response => {
                 console.log("updated cancel/game on", response)

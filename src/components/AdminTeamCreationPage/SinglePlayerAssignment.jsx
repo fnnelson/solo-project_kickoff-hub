@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { Box, Button, Radio, RadioGroup, Select, Stack, Text } from '@chakra-ui/react';
 
 function SinglePlayerAssignment({ player, allTeams }) {
 
@@ -32,16 +33,18 @@ function SinglePlayerAssignment({ player, allTeams }) {
 
     return (
         <div>
-            Player: {player.name ? player.name : player.username}, {player.team_name || 'No team assigned'}
-            <select value={selectedTeam} onChange={(event) => setSelectedTeam(event.target.value)}>
-                <option style={{backgroundColor: 'pink'}} value="">No team</option>
+            <Text as='span'>Player: {player.name ? player.name : player.username}</Text>
+            <Select colorScheme='green' value={selectedTeam} onChange={(event) => setSelectedTeam(event.target.value)}>
+                <option style={{ backgroundColor: 'pink' }} value="">No team</option>
                 {allTeams.map((team) => (
                     <option key={team.id} value={team.id}>
                         {team.team_name}
                     </option>
                 ))}
-            </select>
-            <button onClick={() => handleAssignment(player.id)}>Assign</button>
+            </Select>
+            <Box textAlign='right' >
+                <Button color='#383838' bgColor='#fadf5e' border='2px solid black' onClick={() => handleAssignment(player.id)}>Assign</Button>
+            </Box>
         </div>
     );
 }

@@ -18,6 +18,8 @@ function AdminSchedulePage() {
         // console.log('toggle is now:', toggle)
     }
 
+    console.log("pastGames:", pastGames)
+
     return (
         <div className="container">
 
@@ -31,7 +33,7 @@ function AdminSchedulePage() {
                         <>
                             <div>
                                 {pastGames.map((game, index) => (
-                                    <Card key={index} m='10px'>
+                                    <Card key={index} m='10px' style={{color: game.cancel_status && '#f7f7f7', backgroundColor: game.cancel_status ? '#383838' : (game.home_team_score === -1 || game.away_team_score === -1) ?'pink' : '#f7f7f7'}}>
                                         <CardBody>
                                             <AdminPastGamesItem game={game} />
                                         </CardBody>
@@ -49,7 +51,7 @@ function AdminSchedulePage() {
                             <Divider my='10px' />
                             <div>
                                 {upcomingGames.map((game, index) => (
-                                    <Card key={index} m='10px'>
+                                    <Card key={index} m='10px' style={{color: game.cancel_status && '#f7f7f7', backgroundColor: game.cancel_status && '#383838'}}>
                                         <CardBody>
                                             <AdminUpcomingGamesItem game={game} />
                                         </CardBody>
