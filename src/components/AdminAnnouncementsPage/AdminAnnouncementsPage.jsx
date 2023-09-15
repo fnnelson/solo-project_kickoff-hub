@@ -63,7 +63,8 @@ function AdminAnnouncementsPage() {
             <form onSubmit={handleAddAnnouncement}>
                 <Textarea
                     type="text"
-                    style={{ minHeight: '100px', width: '100%' }}
+                    minH='100px'
+                    w='100%'
                     bgColor='#f7f7f7'
                     border='1px solid black'
                     placeholder='type new announcement here...'

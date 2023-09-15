@@ -8,7 +8,7 @@ function LogOutButton(props) {
       // This button shows up in multiple locations and is styled differently
       // because it's styled differently depending on where it is used, the className
       // is passed to it from it's parents through React props
-      style={{ color: '#383838', fontWeight: 'bold', textShadow: '0 0 3px #f7f7f7' }}
+      style={{ color: '#383838', fontWeight: 'bold', textShadow: '0 0 2px #f7f7f7' }}
       onClick={() => dispatch({ type: 'LOGOUT' })}
     >
       Log Out

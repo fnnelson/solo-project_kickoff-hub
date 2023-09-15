@@ -8,14 +8,15 @@ import { Box, Flex, Center } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faCalendarDays, faTrophy, faClipboardQuestion, faBullhorn, faRepeat, faPeopleGroup, faPlus } from '@fortawesome/free-solid-svg-icons'
 
-const homeIcon = <FontAwesomeIcon icon={faHouse} />
+const playerHomeIcon = <FontAwesomeIcon icon={faHouse}  />
+const adminHomeIcon = <FontAwesomeIcon icon={faHouse} color='red' />
 const calendarIcon = <FontAwesomeIcon icon={faCalendarDays} />
 const trophyIcon = <FontAwesomeIcon icon={faTrophy} />
 const faqIcon = <FontAwesomeIcon icon={faClipboardQuestion} />
 const switchIcon = <FontAwesomeIcon icon={faRepeat} />
-const teamIcon = <FontAwesomeIcon icon={faPeopleGroup} />
-const bullhornIcon = <FontAwesomeIcon icon={faBullhorn} />
-const plusIcon = <FontAwesomeIcon icon={faPlus} />
+const teamIcon = <FontAwesomeIcon icon={faPeopleGroup} color='red'/>
+const bullhornIcon = <FontAwesomeIcon icon={faBullhorn} color='red'/>
+const plusIcon = <FontAwesomeIcon icon={faPlus} color='red'/>
 
 function NavBottom({ toggleAdminMode, isAdminMode }) {
   const user = useSelector((store) => store.user);
@@ -28,7 +29,7 @@ function NavBottom({ toggleAdminMode, isAdminMode }) {
           <>
             <Center flex='1' h='50px'  >
               <Link className="navLink" to="/playerhome">
-                {homeIcon}
+                {playerHomeIcon}
               </Link>
             </Center>
 
@@ -56,7 +57,7 @@ function NavBottom({ toggleAdminMode, isAdminMode }) {
           <>
             <Center flex='1' h='50px'  >
               <Link className="navLink" to="/playerhome">
-                {homeIcon}
+                {playerHomeIcon}
               </Link>
             </Center>
 
@@ -92,7 +93,7 @@ function NavBottom({ toggleAdminMode, isAdminMode }) {
           <>
             <Center flex='1' h='50px'  >
               <Link className="navLink" to="/adminhome">
-                {homeIcon}
+                {adminHomeIcon}
               </Link>
             </Center>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import SinglePlayerAssignment from './SinglePlayerAssignment';
+import { Text } from '@chakra-ui/react';
 
 
 function AdminTeamAssignment({ allPlayers, allTeams }) {
@@ -17,7 +18,7 @@ function AdminTeamAssignment({ allPlayers, allTeams }) {
                 ))}
             </div>
         ) : (
-            <p>Loading...</p>
+            <Text>Loading...</Text>
         )}
     </div>;
 }

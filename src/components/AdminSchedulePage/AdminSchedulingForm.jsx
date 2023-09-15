@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { Select } from '@chakra-ui/react';
 
 function AdminSchedulingForm() {
 
@@ -48,8 +49,6 @@ function AdminSchedulingForm() {
         }
     }
 
-
-
     return (
         <form onSubmit={addNewGame}>
             Date:<input
@@ -66,7 +65,7 @@ function AdminSchedulingForm() {
             />
 
             Field:
-            <select
+            <Select
                 value={field}
                 onChange={(event) => setField(event.target.value)}
             >
@@ -75,10 +74,10 @@ function AdminSchedulingForm() {
                 <option value="2">Pamela Turf Field</option>
                 <option value="3">Kuhlman Stadium</option>
                 <option value="4">Plymouth Fieldhouse</option>
-            </select>
+            </Select>
 
             Home Team:
-            <select
+            <Select
                 value={homeTeam}
                 onChange={(event) => setHomeTeam(event.target.value)}
             >
@@ -89,9 +88,9 @@ function AdminSchedulingForm() {
                 <option value="4">Flaming Dragons</option>
                 <option value="5">Scrappy Koalas</option>
                 <option value="6">Honey Badgers</option>
-            </select>
+            </Select>
             Away Team:
-            <select
+            <Select
                 value={awayTeam}
                 onChange={(event) => setAwayTeam(event.target.value)}
             >
@@ -102,7 +101,7 @@ function AdminSchedulingForm() {
                 <option value="4">Flaming Dragons</option>
                 <option value="5">Scrappy Koalas</option>
                 <option value="6">Honey Badgers</option>
-            </select>
+            </Select>
             <button type="submit">Add Game</button>
         </form>
     );
