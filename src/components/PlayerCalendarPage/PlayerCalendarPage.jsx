@@ -20,11 +20,11 @@ function PlayerCalendarPage() {
 
     return (
         <div className="container">
-            <Tabs isManual variant='enclosed' align="center" defaultIndex={1}>
-                    <TabList>
-                        <Tab>Past Games</Tab>
-                        <Tab>Upcoming Games</Tab>
-                    </TabList>
+            <Tabs isManual variant='enclosed' align="center" defaultIndex={1} >
+                <TabList>
+                    <Tab color='#f7f7f7' _selected={{ color: '#397259', bg: '#fade5d' }}>Past Games</Tab>
+                    <Tab color='#f7f7f7' _selected={{ color: '#397259', bg: '#fade5d' }}>Upcoming Games</Tab>
+                </TabList>
                 <TabPanels>
                     <TabPanel>
                         <>

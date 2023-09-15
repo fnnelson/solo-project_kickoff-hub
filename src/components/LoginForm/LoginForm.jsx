@@ -1,6 +1,7 @@
+import { Box, Button, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -25,8 +26,8 @@ function LoginForm() {
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
+    <form className="formPanel" onSubmit={login} >
+      <Text fontSize='md'>Login</Text>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
@@ -56,9 +57,16 @@ function LoginForm() {
           />
         </label>
       </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
-      </div>
+      <Box>
+        <Button
+          type="submit"
+          name="submit"
+          bgColor='#fadf5e'
+          outline='2px solid #383838'
+        >
+          Log In
+        </Button>
+      </Box>
     </form>
   );
 }

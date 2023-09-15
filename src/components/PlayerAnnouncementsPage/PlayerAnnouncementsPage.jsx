@@ -1,4 +1,4 @@
-import { Box, Card, CardBody, CardHeader, Heading, Stack, StackDivider, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react';
+import { Box, Card, CardBody, CardHeader, Divider, Heading, Stack, StackDivider, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -11,10 +11,10 @@ function PlayerAnnouncementsPage() {
     return (
         <div className="container">
 
-            <Tabs isManual variant='enclosed'>
+            <Tabs isManual variant='enclosed' align='center'>
                 <TabList>
-                    <Tab>Announcements</Tab>
-                    <Tab>FAQs</Tab>
+                    <Tab color='#f7f7f7' _selected={{ color: '#397259', bg: '#fade5d' }}>Announcements</Tab>
+                    <Tab color='#f7f7f7' _selected={{ color: '#397259', bg: '#fade5d' }}>FAQs</Tab>
                 </TabList>
                 <TabPanels>
                     <TabPanel>
@@ -24,7 +24,7 @@ function PlayerAnnouncementsPage() {
                                     <Card key={index} variant='elevated'>
                                         <CardBody>
                                             <Text>
-                                                {item.date}: {item.description}
+                                                <b>{item.date}</b>: {item.description}
                                             </Text>
                                         </CardBody>
                                     </Card>
@@ -36,7 +36,11 @@ function PlayerAnnouncementsPage() {
                         <Box>
                             <Card >
                                 <CardHeader>
-                                    <Heading size='md'>League Details</Heading>
+                                    <Heading
+                                        size='md'
+                                        color='#3a7259'
+                                        fontWeight='bold'
+                                    >League Details</Heading>
                                 </CardHeader>
                                 <CardBody>
                                     <Stack divider={<StackDivider />} spacing='4'>

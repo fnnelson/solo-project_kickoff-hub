@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { Box, Flex, Center } from '@chakra-ui/react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse, faCalendarDays, faTrophy, faClipboardQuestion, faFutbol, faBullhorn, faRepeat, faCalendarPlus, faPeopleGroup, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faCalendarDays, faTrophy, faClipboardQuestion, faFutbol, faBullhorn, faRepeat, faCalendarPlus, faPeopleGroup, faPenToSquare, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const homeIcon = <FontAwesomeIcon icon={faHouse} />
 const calendarIcon = <FontAwesomeIcon icon={faCalendarDays} />
@@ -18,13 +18,13 @@ const editIcon = <FontAwesomeIcon icon={faPenToSquare} />
 const calendarPlusIcon = <FontAwesomeIcon icon={faCalendarPlus} />
 const teamIcon = <FontAwesomeIcon icon={faPeopleGroup} />
 const bullhornIcon = <FontAwesomeIcon icon={faBullhorn} />
-
+const plusIcon = <FontAwesomeIcon icon={faPlus} />
 
 function NavBottom({ toggleAdminMode, isAdminMode }) {
   const user = useSelector((store) => store.user);
 
   return (
-    <Box bg={'gray.200'} borderTop='1px solid gray' position='fixed' bottom='0' left='0' right='0'>
+    <Box bg='#f7f7f7' borderTop='1px solid #383838' position='fixed' bottom='0' left='0' right='0'>
       <Flex as='nav' m='2px'>
         {/* If a user is logged in, show these links */}
         {user.id && !user.admin && (
@@ -101,7 +101,7 @@ function NavBottom({ toggleAdminMode, isAdminMode }) {
 
             <Center flex='1' h='50px'  >
               <Link className="navLink" to="/adminschedule">
-                {calendarPlusIcon}
+                {plusIcon}
               </Link>
             </Center>
 

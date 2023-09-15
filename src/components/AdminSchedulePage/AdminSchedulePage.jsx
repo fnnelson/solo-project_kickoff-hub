@@ -21,10 +21,10 @@ function AdminSchedulePage() {
     return (
         <div className="container">
 
-            <Tabs isManual variant='enclosed' align="center">
+            <Tabs isManual variant='enclosed' align="center" colorScheme='linkedin'>
                 <TabList>
-                    <Tab>Past Games</Tab>
-                    <Tab>Upcoming Games</Tab>
+                    <Tab color='#f7f7f7' _selected={{ color: '#397259', bg: '#fade5d' }}>Past Games</Tab>
+                    <Tab color='#f7f7f7' _selected={{ color: '#397259', bg: '#fade5d' }}>Upcoming Games</Tab>
                 </TabList>
                 <TabPanels>
                     <TabPanel>

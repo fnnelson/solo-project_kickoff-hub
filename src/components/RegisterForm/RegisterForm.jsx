@@ -1,3 +1,4 @@
+import { Button, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,7 +22,7 @@ function RegisterForm() {
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+      <Text fontSize='md'>Register User</Text>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}
@@ -52,7 +53,14 @@ function RegisterForm() {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
+        <Button
+          type="submit"
+          name="submit"
+          bgColor='#fadf5e'
+          outline='2px solid #383838'
+        >
+          Register
+        </Button>
       </div>
     </form>
   );

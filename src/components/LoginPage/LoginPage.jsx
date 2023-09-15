@@ -1,6 +1,7 @@
 import React from 'react';
 import LoginForm from '../LoginForm/LoginForm';
 import { useHistory } from 'react-router-dom';
+import { Button } from '@chakra-ui/react';
 
 function LoginPage() {
   const history = useHistory();
@@ -10,15 +11,16 @@ function LoginPage() {
       <LoginForm />
 
       <center>
-        <button
-          type="button"
-          className="btn btn_asLink"
+        <Button
+          type='button'
+          bgColor='#fadf5e'
+          outline='2px solid #383838'
           onClick={() => {
             history.push('/registration');
           }}
         >
           Register
-        </button>
+        </Button>
       </center>
     </div>
   );

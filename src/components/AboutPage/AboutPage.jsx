@@ -1,3 +1,4 @@
+import { Text } from '@chakra-ui/react';
 import React from 'react';
 
 // This is one of our simplest components
@@ -8,8 +9,9 @@ import React from 'react';
 function AboutPage() {
   return (
     <div className="container">
-      <div>
-        <p>This about page is for anyone to read!</p>
+      <div >
+        <Text 
+        color='#f7f7f7'>This about page is for anyone to read!</Text>
       </div>
     </div>
   );

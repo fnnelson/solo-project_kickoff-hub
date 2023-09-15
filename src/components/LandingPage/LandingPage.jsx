@@ -4,9 +4,9 @@ import './LandingPage.css';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+import { Box, Button, Container, Divider, Heading, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 
 function LandingPage() {
-  const [heading, setHeading] = useState('Welcome');
   const history = useHistory();
 
   const onLogin = (event) => {
@@ -15,53 +15,82 @@ function LandingPage() {
 
   return (
     <div className="container">
-      <h2>{heading}</h2>
+      <Text fontWeight='bold' color='white'>Welcome to KickOff Hub!</Text>
+      <Text color='white' fontStyle='italic'>Please Register Here:</Text>
 
       <div className="grid">
-        <div className="grid-col grid-col_8">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra lacus
-            ut ex molestie blandit. Etiam et turpis sit amet risus mollis
-            interdum. Suspendisse et justo vitae metus bibendum fringilla sed
-            sed justo. Aliquam sollicitudin dapibus lectus, vitae consequat odio
-            elementum eget. Praesent efficitur eros vitae nunc interdum, eu
-            interdum justo facilisis. Sed pulvinar nulla ac dignissim efficitur.
-            Quisque eget eros metus. Vestibulum bibendum fringilla nibh a
-            luctus. Duis a sapien metus.
-          </p>
+        <RegisterForm />
 
-          <p>
-            Praesent consectetur orci dui, id elementum eros facilisis id. Sed
-            id dolor in augue porttitor faucibus eget sit amet ante. Nunc
-            consectetur placerat pharetra. Aenean gravida ex ut erat commodo, ut
-            finibus metus facilisis. Nullam eget lectus non urna rhoncus
-            accumsan quis id massa. Curabitur sit amet dolor nisl. Proin
-            euismod, augue at condimentum rhoncus, massa lorem semper lacus, sed
-            lobortis augue mi vel felis. Duis ultrices sapien at est convallis
-            congue.
-          </p>
-
-          <p>
-            Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
-            Suspendisse posuere dapibus maximus. Aliquam vitae felis libero. In
-            vehicula sapien at semper ultrices. Vivamus sed feugiat libero. Sed
-            sagittis neque id diam euismod, ut egestas felis ultricies. Nullam
-            non fermentum mauris. Sed in enim ac turpis faucibus pretium in sit
-            amet nisi.
-          </p>
-        </div>
-        <div className="grid-col grid-col_4">
-          <RegisterForm />
-
-          <center>
-            <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
-          </center>
-        </div>
+        <center>
+          <Text fontSize='sm' mb='5px'>Already a Member?</Text>
+          <Button
+            bgColor='#fadf5e'
+            outline='2px solid #383838'
+            onClick={onLogin}
+          >
+            Login
+          </Button>
+        </center>
       </div>
+      <Box m='20px'>
+        <Divider />
+        <Heading py='20px'>
+          <Text as="h1" fontSize='lg'>Welcome to the KickOff Hub App</Text>
+        </Heading>
+
+        <Container my='20px'  >
+          <Text fontSize='lg' fontWeight='bold'>For Players:</Text>
+          <UnorderedList>
+            <ListItem>
+              <Text fontWeight='bold'>User-Friendly Sign-In</Text>
+              <Text>Players can easily log in to the app, creating a personalized account that keeps track of their team and league-related information.</Text>
+            </ListItem>
+            <ListItem>
+              <Text fontWeight='bold'>Game Details</Text>
+              <Text>The app provides players with detailed information about their upcoming games. This includes game time, location, and directions to the field.</Text>
+            </ListItem>
+            <ListItem>
+              <Text fontWeight='bold'>Team Schedule</Text>
+              <Text>Players can access their team's complete schedule through the app. This schedule not only includes upcoming games but also past matches.</Text>
+            </ListItem>
+            <ListItem>
+              <Text fontWeight='bold'>League Standings</Text>
+              <Text>The app offers real-time access to league standings. Players can easily check how their team ranks compared to others.</Text>
+            </ListItem>
+            <ListItem>
+              <Text fontWeight='bold'>Announcements and FAQs</Text>
+              <Text>Important league announcements, updates, and FAQs are readily available within the app, keeping players informed.</Text>
+            </ListItem>
+          </UnorderedList>
+        </Container >
+
+        <Container my='20px' >
+          <Text fontSize='lg' fontWeight='bold'>For League Administrators:</Text>
+          <UnorderedList>
+            <ListItem>
+              <Text fontWeight='bold'>Player Management</Text>
+              <Text>Administrators can efficiently manage player registrations through the app. They can add new players, update player information, and ensure the roster is up to date.</Text>
+            </ListItem>
+            <ListItem>
+              <Text fontWeight='bold'>Score Updates</Text>
+              <Text>Administrators have the ability to update scores for games in real-time, ensuring accurate and up-to-date statistics.</Text>
+            </ListItem>
+            <ListItem>
+              <Text fontWeight='bold'>Game Management</Text>
+              <Text>The app allows administrators to handle various aspects of game management, including canceling games due to unforeseen circumstances or adding new games to the schedule.</Text>
+            </ListItem>
+            <ListItem>
+              <Text fontWeight='bold'>Announcement Updates</Text>
+              <Text>Administrators can easily broadcast important announcements to all app users, ensuring critical information reaches all participants promptly.</Text>
+            </ListItem>
+          </UnorderedList>
+        </Container >
+
+        <footer>
+          <Text>In summary, the KickOff Hub app serves as a centralized platform for all things related to organized sports. This comprehensive tool enhances the overall experience of both players and administrators, making sports leagues more organized and enjoyable for everyone involved.</Text>
+        </footer>
+
+      </Box>
     </div>
   );
 }
