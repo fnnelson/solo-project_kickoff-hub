@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { Box, Button, Flex, IconButton, Spacer, Text } from "@chakra-ui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 function AdminUpcomingGamesItem({ game }) {
 
@@ -35,13 +38,31 @@ function AdminUpcomingGamesItem({ game }) {
         <div>
             {game.cancel_status ?
                 (
-                    <p>
-                        <s>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}</s> <button onClick={() => { handleDelete(game.id) }}>Delete</button> <button onClick={() => { handleCancelGame(game.id) }}>Game On!</button>
-                    </p>
+                    <>
+                        <Text>
+                            <s>{game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}</s>
+                        </Text>
+                        <Flex mt='15px'>
+                            <Button onClick={() => { handleCancelGame(game.id) }}>Game On!</Button>
+                            <Spacer />
+                            <IconButton border='2px solid pink'>
+                                <FontAwesomeIcon icon={faTrashCan} onClick={() => handleDelete(game.id)} color='black' />
+                            </IconButton>
+                        </Flex>
+                    </>
                 ) : (
-                    <p>
-                        {game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name} <button onClick={() => { handleDelete(game.id) }}>Delete</button> <button onClick={() => { handleCancelGame(game.id) }}>Cancel Game</button>
-                    </p>
+                    <>
+                        <Text>
+                            {game.day_of_week}, {game.game_date} at {game.game_time} - {game.home_team_name} vs {game.away_team_name}
+                        </Text>
+                        <Flex mt='15px'>
+                            <Button onClick={() => { handleCancelGame(game.id) }}>Cancel Game</Button>
+                            <Spacer />
+                            <IconButton border='2px solid pink'>
+                                <FontAwesomeIcon icon={faTrashCan} onClick={() => handleDelete(game.id)} color='black' />
+                            </IconButton>
+                        </Flex>
+                    </>
                 )}
         </div>
     );

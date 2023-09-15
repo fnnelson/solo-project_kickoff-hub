@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { Select } from '@chakra-ui/react';
+import { Box, Button, Input, Select, Text } from '@chakra-ui/react';
 
 function AdminSchedulingForm() {
 
@@ -49,23 +49,36 @@ function AdminSchedulingForm() {
         }
     }
 
+
+
     return (
         <form onSubmit={addNewGame}>
-            Date:<input
-                type="date"
-                value={date}
-                onChange={(event) => setDate(event.target.value)}
-            />
-
-            Time: <input
-                type="time"
-                placeholder=""
-                value={time}
-                onChange={(event) => setTime(event.target.value)}
-            />
-
-            Field:
+            <Box textAlign='left'>
+                <Text color='#f7f7f7'>Date:</Text>
+                <Input
+                    type="date"
+                    bgColor='#f7f7f7'
+                    value={date}
+                    onChange={(event) => setDate(event.target.value)}
+                />
+            </Box>
+            <Box textAlign='left'>
+                <Text color='#f7f7f7'>Time:</Text>
+                <Input
+                    type="time"
+                    bgColor='#f7f7f7'
+                    step='900'
+                    placeholder=""
+                    value={time}
+                    onChange={(event) => setTime(event.target.value)}
+                />
+            </Box>
+            <Box textAlign='left'>
+                <Text color='#f7f7f7'>Field:</Text>
+            </Box>
             <Select
+                bgColor='#f7f7f7'
+                m='5px'
                 value={field}
                 onChange={(event) => setField(event.target.value)}
             >
@@ -75,10 +88,13 @@ function AdminSchedulingForm() {
                 <option value="3">Kuhlman Stadium</option>
                 <option value="4">Plymouth Fieldhouse</option>
             </Select>
-
-            Home Team:
+            <Box textAlign='left'>
+                <Text color='#f7f7f7'>Home Team:</Text>
+            </Box>
             <Select
                 value={homeTeam}
+                bgColor='#f7f7f7'
+                m='5px'
                 onChange={(event) => setHomeTeam(event.target.value)}
             >
                 <option value="">Select Home Team</option>
@@ -89,8 +105,12 @@ function AdminSchedulingForm() {
                 <option value="5">Scrappy Koalas</option>
                 <option value="6">Honey Badgers</option>
             </Select>
-            Away Team:
+            <Box textAlign='left'>
+                <Text color='#f7f7f7'>Away Team:</Text>
+            </Box>
             <Select
+                bgColor='#f7f7f7'
+                m='5px'
                 value={awayTeam}
                 onChange={(event) => setAwayTeam(event.target.value)}
             >
@@ -102,7 +122,9 @@ function AdminSchedulingForm() {
                 <option value="5">Scrappy Koalas</option>
                 <option value="6">Honey Badgers</option>
             </Select>
-            <button type="submit">Add Game</button>
+            <Box textAlign='right' my='10px'>
+                <Button type='submit' color='#383838' bgColor='#fadf5e' border='2px solid black'>Add Game</Button>
+            </Box>
         </form>
     );
 }
