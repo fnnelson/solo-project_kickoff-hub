@@ -7,7 +7,7 @@ import './Footer.css';
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 function Footer() {
-  return <footer style={{ color: '#fadf5e', textShadow: '0 0 2px #383838'}}>&copy; Forrest Nelson Studios</footer>;
+  return <footer style={{ color: '#fadf5e', textShadow: '0 0 2px #383838'}}>&copy; Forrest Nelson</footer>;
 }
 
 export default Footer;

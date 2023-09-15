@@ -15,7 +15,6 @@ function AdminAnnouncementsPage() {
 
     const allAnnouncements = useSelector(store => store.announcements.allAnnouncements)
     // console.log('allAnnouncements are:', allAnnouncements)
-    // TODO: why does this update upon every letter typed in the input/textarea?
 
     const handleAddAnnouncement = (event) => {
         event.preventDefault();
@@ -36,7 +35,6 @@ function AdminAnnouncementsPage() {
 
     const handleDeleteAnnouncement = (itemObj) => {
         console.log("inside handleDelete", itemObj.id);
-        // may as well send the whole object?
 
         axios.delete(`/api/announcement/${itemObj.id}`)
             .then(response => {
@@ -51,7 +49,7 @@ function AdminAnnouncementsPage() {
     return (
         <div className="container">
             <Heading
-                fontSize='md'
+                fontSize='lg'
                 color='#f7f7f7'
                 fontWeight='bold'
                 textShadow='0 0 3px #383838'

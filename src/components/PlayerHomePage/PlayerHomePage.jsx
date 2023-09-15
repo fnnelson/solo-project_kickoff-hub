@@ -45,11 +45,12 @@ function PlayerHome() {
 
     return (
         <div className="container">
-            <Stack >
+            <Stack>
                 <StackItem h='150px' >
                     <Box>
                         <Box fontSize='xl' my='15px' >
                             <FontAwesomeIcon icon={faCircleUser} size="xl" color='#383838' />
+                            {/* <Text ml='15px' as='span'>Your team: </Text> */}
                         </Box>
                         {user.name ? <Heading color='#f7f7f7' textShadow='0 0 5px #383838'>Hello, {user.name}!</Heading> : <Heading color='#f7f7f7' textShadow='0 0 3px #383838'>Hello, {user.username}!</Heading>}
                     </Box>

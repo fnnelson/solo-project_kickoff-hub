@@ -51,7 +51,7 @@ function AdminSchedulePage() {
                             <AdminSchedulingForm />
                             <Divider my='10px' />
                             <Center>
-                                <Link to='/adminannouncements'><Button variant='outline' color='#f7f7f7' mt='10px' mb='20px'>Add announcement if canceling game</Button></Link>
+                                <Link to='/adminannouncements'><Button variant='outline' color='#fadf5e' mt='10px' mb='20px'>Add announcement if canceling game</Button></Link>
                             </Center>
                             <div>
                                 {upcomingGames.map((game, index) => (

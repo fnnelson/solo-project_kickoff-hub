@@ -33,8 +33,14 @@ function SinglePlayerAssignment({ player, allTeams }) {
 
     return (
         <div>
-            <Text as='span'>Player: {player.name ? player.name : player.username}</Text>
-            <Select colorScheme='green' value={selectedTeam} onChange={(event) => setSelectedTeam(event.target.value)}>
+
+            <Text as='span' color='#f7f7f7' fontSize='lg' fontWeight='bold' m='5px'>{player.name ? player.name : player.username}</Text>
+            <Select bgColor='#f7f7f7'
+                m='5px'
+                colorScheme='green'
+                value={selectedTeam}
+                onChange={(event) => setSelectedTeam(event.target.value)}
+            >
                 <option style={{ backgroundColor: 'pink' }} value="">No team</option>
                 {allTeams.map((team) => (
                     <option key={team.id} value={team.id}>

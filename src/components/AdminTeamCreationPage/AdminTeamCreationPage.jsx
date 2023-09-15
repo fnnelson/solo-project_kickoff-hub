@@ -27,21 +27,38 @@ function AdminTeamCreationPage() {
         counts[team.id] = allPlayers.filter((player) => player.team_id === team.id).length;
         return counts;
     }, {});
+    const playersWithNoTeam = allPlayers.filter((player) => !player.team_id);
 
     return (
         <div className="container">
 
+            <Heading
+                fontSize='lg'
+                color='#f7f7f7'
+                fontWeight='bold'
+                textShadow='0 0 3px #383838'
+                mb='20px'
+            >
+                Team Management
+            </Heading>
+
             <div>
                 {allTeams ? (
                     <div>
+                        <Text color='#f7f7f7'>
+                            <b>No Team Assigned</b>, players #: <b>{playersWithNoTeam.length}</b>
+                        </Text>
+                        {playersWithNoTeam.map((player, playerIndex) => (
+                            <Text as='span' color='#fadf5e' key={playerIndex}>| {player.username || player.name} </Text>
+                        ))}
                         {allTeams.map((team, index) => (
                             <div key={index}>
-                                <Text>
+                                <Text color='#f7f7f7'>
                                     <b>{team.team_name}</b>, players #: <b>{teamPlayerCounts[team.id]}</b>
                                 </Text>
                                 {allPlayers.map((player, playerIndex) => (
                                     player.team_id === team.id ? (
-                                        <span key={playerIndex}>{player.username || player.name} </span>
+                                        <Text as='span' color='#fadf5e' key={playerIndex}>| {player.username || player.name} </Text>
                                     ) : null
                                 ))}
                             </div>
@@ -54,7 +71,14 @@ function AdminTeamCreationPage() {
 
             <Divider my='20px' />
 
-            <Heading size='lg' mt='30px'>Match players to teams:</Heading>
+            <Heading
+                size='lg'
+                my='30px'
+                textShadow='0 0 2px #f7f7f7'
+                textAlign='center'
+            >
+                Match players to teams:
+            </Heading>
 
             < AdminTeamAssignment allPlayers={allPlayers} allTeams={allTeams} />
 
