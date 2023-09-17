@@ -103,6 +103,8 @@ function AdminPastGamesItem({ game, user }) {
                                 type='text'
                                 style={inputStyle}
                                 value={awayTeamScore}
+                                bgColor='white'
+                                color='black'
                                 onChange={(event) => { setAwayTeamScore(event.target.value) }}
                             />
                         </Text>
@@ -115,7 +117,6 @@ function AdminPastGamesItem({ game, user }) {
                     </>
                 ) : (
                     <>
-                        <Button onClick={handleSave}>Save</Button>
                         <Text>
                             {game.day_of_week}, {game.game_date} at {game.game_time}</Text>
                         <Text>{game.home_team_name}{' '}
