@@ -16,8 +16,8 @@ function PlayerHome() {
     const user = useSelector((store) => store.user);
     const upcomingUserGames = useSelector(store => store.games.upcomingUserGames);
 
-    console.log('upcomingUserGames is:', upcomingUserGames)
-    console.log('user data:', user)
+    // console.log('upcomingUserGames is:', upcomingUserGames)
+    // console.log('user data:', user)
 
     const [nextGame, setNextGame] = useState('');
 

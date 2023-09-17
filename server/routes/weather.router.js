@@ -2,11 +2,14 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const axios = require('axios');
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     // GET route code here
     // console.log("My weather api key:", process.env.WEATHER_API_KEY)
     const apiKey = process.env.WEATHER_API_KEY;
@@ -21,13 +24,6 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
         })
 
-});
-
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-    // POST route code here
 });
 
 module.exports = router;

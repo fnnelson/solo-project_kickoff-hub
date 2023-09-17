@@ -10,6 +10,7 @@ function AdminSchedulePage() {
 
     const upcomingGames = useSelector(store => store.games.upcomingGames);
     const pastGames = useSelector(store => store.games.pastGames);
+    const user = useSelector((store) => store.user);
 
     const [toggle, setToggle] = useState(true);
 
@@ -35,7 +36,7 @@ function AdminSchedulePage() {
                                 {pastGames.map((game, index) => (
                                     <Card key={index} m='10px' style={{ color: game.cancel_status && '#f7f7f7', backgroundColor: game.cancel_status ? '#383838' : (game.home_team_score === -1 || game.away_team_score === -1) ? 'pink' : '#f7f7f7' }}>
                                         <CardBody>
-                                            <AdminPastGamesItem game={game} />
+                                            <AdminPastGamesItem game={game} user={user} />
                                         </CardBody>
                                     </Card>
                                 ))}
@@ -57,7 +58,7 @@ function AdminSchedulePage() {
                                 {upcomingGames.map((game, index) => (
                                     <Card key={index} m='10px' style={{ color: game.cancel_status && '#f7f7f7', backgroundColor: game.cancel_status && '#383838' }}>
                                         <CardBody>
-                                            <AdminUpcomingGamesItem game={game} />
+                                            <AdminUpcomingGamesItem game={game} user={user} />
                                         </CardBody>
                                     </Card>
                                 ))}

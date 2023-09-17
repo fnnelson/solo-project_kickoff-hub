@@ -19,9 +19,6 @@ function AboutPage() {
         <Text
           color='#f7f7f7'>
           Prime Digital Academy <FontAwesomeIcon icon={faGem} style={{ color: "#a372fd", }} /> Iolite Cohort
-          forrestnnelson@gmail.com <br />
-          linkedin.com/in/forrest-nelson/ <br />
-          github.com/fnnelson<br />
         </Text>
         <Divider my='10px' />
         <Text
@@ -35,7 +32,12 @@ function AboutPage() {
         <Divider my='10px' />
         <Text
           color='#f7f7f7'>
-          Thank you to our instructor Key, all of the Prime instructors and staff including Dane, Rachel, Andrew, and Aaron, and all of my amazing cohort-mates in Iolite.
+          Ideas for addl features: player attendance, team chat, player profiles, weather forecasts.
+        </Text>
+        <Divider my='10px' />
+        <Text
+          color='#f7f7f7'>
+          Thank you to our instructor Key, all of the Prime instructors and staff including Dane, Rachel, Andrew, and Aaron, and all of my amazing cohort-mates in Iolite!
         </Text>
         <Box>
           <Center my='5px'>

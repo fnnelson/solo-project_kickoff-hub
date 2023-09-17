@@ -1,11 +1,14 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 /**
  * GET all games!
  */
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     // GET route code here
     // console.log("get made it to the server side!");
     const sqlText = `
@@ -63,7 +66,7 @@ router.get('/', (req, res) => {
 /**
  * GET single game (only used for upcoming games)..
  */
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     const gameId = [req.params.id];
     console.log('gameId on server side:', gameId);
     const sqlText = `
@@ -114,7 +117,7 @@ router.get('/:id', (req, res) => {
 /**
  * GET all of the user's games..
  */
-router.get('/usergames/:id', (req, res) => {
+router.get('/usergames/:id', rejectUnauthenticated, (req, res) => {
     console.log("user GET made it to the server side!");
     const userTeamId = [req.params.id];
     const sqlText = `
@@ -176,7 +179,7 @@ ORDER BY game_date, game_time;
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log("made it to the server side POST new game", req.body)
     const queryParams = [
         req.body.gameDate,
@@ -204,7 +207,7 @@ router.post('/', (req, res) => {
 /**
  * PUT - transaction type PUT!
  */
-router.put('/score/:id', async (req, res) => {
+router.put('/score/:id', rejectUnauthenticated, async (req, res) => {
     console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
     const queryParams = [
         req.params.id, // $1
@@ -267,7 +270,7 @@ WHERE "id" = $1;
 /**
  * PUT - updating whether a game is cancelled! Flipping boolean of cancel_status for specific game ID
  */
-router.put('/cancel/:id', (req, res) => {
+router.put('/cancel/:id', rejectUnauthenticated, (req, res) => {
     // console.log('req.body is:', req.body, 'and req.params.id is:', req.params.id)
     const queryParams = [req.params.id];
     const sqlText = `
@@ -289,7 +292,7 @@ router.put('/cancel/:id', (req, res) => {
 * DELETE route
 */
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     console.log('req.params.id is:', req.params.id)
     const deletedGameId = [req.params.id];
     const sqlText = `

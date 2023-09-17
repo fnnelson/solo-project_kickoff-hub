@@ -58,7 +58,7 @@ function PlayerGameDetailsPage() {
                 <div>
                     {gameDetails.cancel_status ?
                         <>
-                            <Text as='h1' color='red'>Game Canceled <Link to='/playerannouncements'><Button>Announcements</Button></Link> </Text>
+                            <Text fontSize='lg' textAlign='center' color='red' my='10px' textShadow='0 0 3px #f7f7f7'>Game Canceled <Link to='/playerannouncements'><Button size='xs'>Announcements</Button></Link> </Text>
                         </>
                         :
                         <Text fontSize='lg' textAlign='center' color='#fadf5e' my='10px' textShadow='0 0 5px #383838'>Game Details</Text>

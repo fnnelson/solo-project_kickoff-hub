@@ -10,7 +10,7 @@ const winnerIcon = <FontAwesomeIcon icon={faFutbol} />
 
 // Page at '/adminschedule'
 
-function AdminPastGamesItem({ game }) {
+function AdminPastGamesItem({ game, user }) {
 
     const dispatch = useDispatch();
 
@@ -56,7 +56,9 @@ function AdminPastGamesItem({ game }) {
             axios.put(`/api/game/score/${gameId}`, updatedScoreObj)
                 .then(response => {
                     console.log("1st PUT successful!", response);
+                    console.log("upcomingUserGames[0].team_name is:", user.team_id)
                     dispatch({ type: 'FETCH_GAMES' })
+                    dispatch({ type: 'FETCH_USER_GAMES', payload: user.team_id })
                 })
                 .catch(error => {
                     console.error("1st PUT ain't PUTtin", error);

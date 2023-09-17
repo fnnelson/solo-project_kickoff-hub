@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { Box, Button, Flex, IconButton, Spacer, Text } from "@chakra-ui/react";
+import { Button, Flex, IconButton, Spacer, Text } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
-function AdminUpcomingGamesItem({ game }) {
+function AdminUpcomingGamesItem({ game, user }) {
 
     const dispatch = useDispatch();
 
@@ -27,6 +27,7 @@ function AdminUpcomingGamesItem({ game }) {
             .then(response => {
                 console.log("updated cancel/game on", response)
                 dispatch({ type: 'FETCH_GAMES' })
+                dispatch({ type: 'FETCH_USER_GAMES', payload: user.team_id })
             })
             .catch(error => {
                 console.log("error with PUT client side", error)
