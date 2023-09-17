@@ -25,8 +25,10 @@ router.get('/', (req, res) => {
         game.cancel_status,
         game.home_team_id,
         game.home_team_score,
+        game.home_team_result,
         game.away_team_id,
         game.away_team_score,
+        game.away_team_result,
         home_team.team_name AS home_team_name,
         home_team.home_jersey,
         home_team.wins AS home_team_wins,
@@ -59,7 +61,7 @@ router.get('/', (req, res) => {
 });
 
 /**
- * GET single game..
+ * GET single game (only used for upcoming games)..
  */
 router.get('/:id', (req, res) => {
     const gameId = [req.params.id];
@@ -132,8 +134,10 @@ router.get('/usergames/:id', (req, res) => {
     game.cancel_status,
     game.home_team_id,
     game.home_team_score,
+    game.home_team_result,
     game.away_team_id,
     game.away_team_score,
+    game.away_team_result,
     home_team.team_name AS home_team_name,
     home_team.home_jersey,
     home_team.wins AS home_team_wins,
@@ -144,6 +148,10 @@ router.get('/usergames/:id', (req, res) => {
     away_team.wins AS away_team_wins,
     away_team.losses AS away_team_losses,
     away_team.draws AS away_team_draws,
+    CASE
+        WHEN game.home_team_id = $1 THEN home_team.team_name
+        WHEN game.away_team_id = $1 THEN away_team.team_name
+    END AS user_team_name,
     field.field_name,
     field.address,
     field.field_photo,

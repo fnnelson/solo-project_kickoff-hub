@@ -59,12 +59,18 @@ function App() {
     }
   }, [dispatch, user.team_id]);
 
+// Kickoff Hub color pallette: 
+// green - #3a7259
+// yellow - #fadf5e
+// black - #383838
+// white - #f7f7f7
+
   return (
     <Router>
       <div>
-        <Flex as='div' flexDirection='column' minH='100vh'>
+        <Flex as='div' flexDirection='column' minH='100vh' bg='#3A7259'>
           <NavTop isAdminMode={isAdminMode} />
-          <Box overflowY='auto' maxH='calc(100vh - 50px)' mt='50px'>
+          <Box overflowY='auto' maxH='calc(100vh - 50px)' mt='60px'>
             <Switch>
               {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
               <Redirect exact from="/" to="/home" />
@@ -185,7 +191,7 @@ function App() {
                 {user.id ?
                   // If the user is already logged in, 
                   // redirect to the /user page
-                  <Redirect to="/user" />
+                  <Redirect to="/playerhome" />
                   :
                   // Otherwise, show the login page
                   <LoginPage />

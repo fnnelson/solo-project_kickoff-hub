@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import PlayerUpcomingGamesItem from "./PlayerUpcomingGamesItem";
 import PlayerPastGamesItem from "./PlayerPastGamesItem";
-import { Card, CardBody, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Card, CardBody, Heading, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
 
 // Page at '/playercalendar'
 
@@ -20,11 +20,11 @@ function PlayerCalendarPage() {
 
     return (
         <div className="container">
-            <Tabs isManual variant='enclosed' align="center" defaultIndex={1}>
-                    <TabList>
-                        <Tab>Past Games</Tab>
-                        <Tab>Upcoming Games</Tab>
-                    </TabList>
+            <Tabs isManual variant='enclosed' align="center" defaultIndex={1} >
+                <TabList>
+                    <Tab color='#f7f7f7' _selected={{ color: '#397259', bg: '#fade5d' }}>Past Games</Tab>
+                    <Tab color='#f7f7f7' _selected={{ color: '#397259', bg: '#fade5d' }}>Upcoming Games</Tab>
+                </TabList>
                 <TabPanels>
                     <TabPanel>
                         <>
@@ -37,7 +37,7 @@ function PlayerCalendarPage() {
                                     </Card>
                                 ))}
                             </div>
-                            <p>[x] - score has not yet been entered</p>
+                            <Text color='#f7f7f7'>[x] - score has not yet been entered</Text>
                         </>
                     </TabPanel>
                     <TabPanel>
@@ -53,7 +53,7 @@ function PlayerCalendarPage() {
                                     ))}
                                 </div>
                                 :
-                                <p>No upcoming games</p>
+                                <Heading>No upcoming games</Heading>
                             }
                         </>
                     </TabPanel>

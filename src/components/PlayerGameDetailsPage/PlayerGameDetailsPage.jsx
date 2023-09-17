@@ -1,7 +1,10 @@
+import { Box, Button, Card, CardBody, CardHeader, Center, Divider, HStack, Heading, Image, Stack, StackDivider, Text } from "@chakra-ui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { faLocationArrow, faShirt } from "@fortawesome/free-solid-svg-icons";
 
 // Page at '/playergamedetails/(gameid)'
 
@@ -15,16 +18,26 @@ function PlayerGameDetailsPage() {
         fetchSingleGame();
     }, [gameId])
 
+    const getShirtIconStyle = (color) => ({
+        color: color, // setting the icon color to the provided hex code
+    });
+
     const fetchSingleGame = () => {
         console.log('inside fetchSingleGame with gameId:', gameId)
         axios.get(`/api/game/${gameId}`)
             .then(response => {
                 console.log('response with GET single game:', response.data)
-                let gameDate = new Date(response.data[0].game_date);
-                let day = gameDate.getDate();
-                let month = gameDate.getMonth() + 1; // month plus 1 since it does 0-11
-                let formattedDate = `${month}/${day}`
-                response.data[0].game_date = formattedDate;
+                let gameDate = new Date(response.data[0].game_date).toLocaleDateString("en-us", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                });
+
+                // let day = gameDate.getDate();
+                // let month = gameDate.getMonth() + 1; // month plus 1 since it does 0-11
+                // let formattedDate = `${month}/${day}`
+
+                response.data[0].game_date = gameDate;
                 let dbTime = response.data[0].game_time;
                 // console.log('DB time is:', dbTime)
                 if (dbTime[0] == '0') {
@@ -45,34 +58,60 @@ function PlayerGameDetailsPage() {
                 <div>
                     {gameDetails.cancel_status ?
                         <>
-                            <h1 style={{ color: 'red' }}>Game Canceled <Link to='/playerannouncements'><button>Announcements</button></Link> </h1>
+                            <Text as='h1' color='red'>Game Canceled <Link to='/playerannouncements'><Button>Announcements</Button></Link> </Text>
                         </>
                         :
-                        <h2>Game Details</h2>
+                        <Text fontSize='lg' textAlign='center' color='#fadf5e' my='10px' textShadow='0 0 5px #383838'>Game Details</Text>
                     }
                     <a href={gameDetails.maps_link} target="_blank" rel="noopener noreferrer">
                         <span style={{ position: 'relative' }}>
-                            <img
+                            <Image
                                 src={gameDetails.field_photo || 'http://via.placeholder.com/450x250'} // Use the provided photo URL or a placeholder
                                 alt="Field Photo"
                                 style={{
                                     width: '450px',
                                     height: '250px',
-                                    border: '2px solid #000'
+                                    border: '2px solid #383838'
                                 }}
                             />
                         </span>
                     </a>
-                    <p>*clicking photo will bring you to Google Maps</p>
-                    <h4>{gameDetails.field_name}</h4>
-                    <h5>{gameDetails.address}</h5>
-                    <h3>{gameDetails.game_date} @ {gameDetails.game_time}</h3>
-                    <p>Home - Jersey color {gameDetails.home_jersey}</p>
-                    <p>{gameDetails.home_team_name} {gameDetails.home_team_wins}-{gameDetails.home_team_losses}-{gameDetails.home_team_draws}</p>
-                    <p>vs.</p>
-                    <p>Away - Jersey color {gameDetails.away_jersey}</p>
-                    <p>{gameDetails.away_team_name} {gameDetails.away_team_wins}-{gameDetails.away_team_losses}-{gameDetails.away_team_draws}</p>
+                    <Text color='#fadf5e' textAlign='right' fontSize='sm'>CLICK PHOTO FOR NAVIGATION <FontAwesomeIcon icon={faLocationArrow} /></Text>
+                    <Stack textAlign='center' m='20px' fontWeight='bold' color='#f7f7f7'>
+                        <Text fontSize='lg'>{gameDetails.field_name}</Text>
+                        <Text>{gameDetails.address}</Text>
+                        <Text fontSize='lg'>{gameDetails.game_date} @ {gameDetails.game_time}</Text>
+                    </Stack>
+
+                    <Center>
+                        <HStack spacing='6'>
+                            <Stack align='center' color='#f7f7f7'>
+                                <Text align='center'>{gameDetails.home_team_name}</Text>
+                                <Text>{gameDetails.home_team_wins}-{gameDetails.home_team_losses}-{gameDetails.home_team_draws}</Text>
+                                <Text align='center' fontSize='4xl'>
+                                    <FontAwesomeIcon
+                                        icon={faShirt}
+                                        style={getShirtIconStyle(gameDetails.home_jersey)}
+                                    />
+                                </Text>
+                                <Heading size='xs'>Home</Heading>
+                            </Stack>
+                            <Text m='5px' color='#f7f7f7'>vs.</Text>
+                            <Stack align='center' color='#f7f7f7'>
+                                <Text align='center'>{gameDetails.away_team_name}</Text>
+                                <Text>{gameDetails.away_team_wins}-{gameDetails.away_team_losses}-{gameDetails.away_team_draws}</Text>
+                                <Text align='center' fontSize='4xl'>
+                                    <FontAwesomeIcon
+                                        icon={faShirt}
+                                        style={getShirtIconStyle(gameDetails.away_jersey)}
+                                    />
+                                </Text>
+                                <Heading size='xs'>Away</Heading>
+                            </Stack>
+                        </HStack>
+                    </Center>
                 </div>
+
             ) : (
                 <p>Loading...</p>
             )}

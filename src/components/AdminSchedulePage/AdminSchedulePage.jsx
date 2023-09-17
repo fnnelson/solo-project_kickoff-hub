@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AdminPastGamesItem from "./AdminPastGamesItem";
 import AdminUpcomingGamesItem from "./AdminUpcomingGamesItem";
 import AdminSchedulingForm from "./AdminSchedulingForm";
-import { Card, CardBody, Divider, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Box, Button, Card, CardBody, Center, Divider, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
 
 function AdminSchedulePage() {
 
@@ -18,20 +18,22 @@ function AdminSchedulePage() {
         // console.log('toggle is now:', toggle)
     }
 
+    console.log("pastGames:", pastGames)
+
     return (
         <div className="container">
 
-            <Tabs isManual variant='enclosed' align="center">
+            <Tabs isManual variant='enclosed' align="center" colorScheme='linkedin'>
                 <TabList>
-                    <Tab>Past Games</Tab>
-                    <Tab>Upcoming Games</Tab>
+                    <Tab color='#f7f7f7' _selected={{ color: '#397259', bg: '#fade5d' }}>Past Games</Tab>
+                    <Tab color='#f7f7f7' _selected={{ color: '#397259', bg: '#fade5d' }}>Upcoming Games</Tab>
                 </TabList>
                 <TabPanels>
                     <TabPanel>
                         <>
                             <div>
                                 {pastGames.map((game, index) => (
-                                    <Card key={index} m='10px'>
+                                    <Card key={index} m='10px' style={{ color: game.cancel_status && '#f7f7f7', backgroundColor: game.cancel_status ? '#383838' : (game.home_team_score === -1 || game.away_team_score === -1) ? 'pink' : '#f7f7f7' }}>
                                         <CardBody>
                                             <AdminPastGamesItem game={game} />
                                         </CardBody>
@@ -43,13 +45,17 @@ function AdminSchedulePage() {
                     </TabPanel>
                     <TabPanel>
                         <>
-                            <h3>Add New Game to Schedule:</h3>
+                            <Box>
+                                <Text color='#f7f7f7' textShadow='0 0 3px black' fontSize='lg' m='10px'><b>Add New Game to Schedule:</b></Text>
+                            </Box>
                             <AdminSchedulingForm />
-                            <Link to='/adminannouncements'><h4>Add announcement if canceling game</h4></Link>
                             <Divider my='10px' />
+                            <Center>
+                                <Link to='/adminannouncements'><Button variant='outline' color='#fadf5e' mt='10px' mb='20px'>Add announcement if canceling game</Button></Link>
+                            </Center>
                             <div>
                                 {upcomingGames.map((game, index) => (
-                                    <Card key={index} m='10px'>
+                                    <Card key={index} m='10px' style={{ color: game.cancel_status && '#f7f7f7', backgroundColor: game.cancel_status && '#383838' }}>
                                         <CardBody>
                                             <AdminUpcomingGamesItem game={game} />
                                         </CardBody>
@@ -60,8 +66,6 @@ function AdminSchedulePage() {
                     </TabPanel>
                 </TabPanels>
             </Tabs>
-
-            {/* <button onClick={togglePastFuture}>Toggle</button> */}
         </div >
     );
 }

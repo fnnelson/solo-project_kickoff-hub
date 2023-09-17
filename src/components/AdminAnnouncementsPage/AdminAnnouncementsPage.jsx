@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
-import { Box, Button, Card, CardBody, Heading, Stack, Tabs, Text, Textarea } from '@chakra-ui/react';
+import { Box, Button, Card, CardBody, Heading, IconButton, Stack, Tabs, Text, Textarea } from '@chakra-ui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 // Page at '/adminannouncements'
 
@@ -13,7 +15,6 @@ function AdminAnnouncementsPage() {
 
     const allAnnouncements = useSelector(store => store.announcements.allAnnouncements)
     // console.log('allAnnouncements are:', allAnnouncements)
-    // TODO: why does this update upon every letter typed in the input/textarea?
 
     const handleAddAnnouncement = (event) => {
         event.preventDefault();
@@ -34,7 +35,6 @@ function AdminAnnouncementsPage() {
 
     const handleDeleteAnnouncement = (itemObj) => {
         console.log("inside handleDelete", itemObj.id);
-        // may as well send the whole object?
 
         axios.delete(`/api/announcement/${itemObj.id}`)
             .then(response => {
@@ -48,13 +48,24 @@ function AdminAnnouncementsPage() {
 
     return (
         <div className="container">
-            <Heading fontSize='md' >Admin Announcements Page</Heading>
+            <Heading
+                fontSize='lg'
+                color='#f7f7f7'
+                fontWeight='bold'
+                textShadow='0 0 3px #383838'
+                mb='20px'
+            >
+                Admin Announcements
+            </Heading>
 
             <form onSubmit={handleAddAnnouncement}>
                 <Textarea
                     type="text"
-                    style={{ minHeight: '100px', width: '100%' }}
-                    placeholder='type new announcement...'
+                    minH='100px'
+                    w='100%'
+                    bgColor='#f7f7f7'
+                    border='1px solid black'
+                    placeholder='type new announcement here...'
                     value={newAnnouncement}
                     onChange={(event) => setNewAnnouncement(event.target.value)}
                     onInput={(event) => {
@@ -63,7 +74,17 @@ function AdminAnnouncementsPage() {
                     }}
                 ></Textarea>
                 <Box textAlign='right'>
-                    <Button m='5px' type='submit'>Add</Button>
+                    <Button
+                        m='5px'
+                        mb='25px'
+                        type='submit'
+                        bgColor='#fadf5e'
+                        color='#383838'
+                        fontWeight='bold'
+                        textShadow='0 0 3px #f7f7f7'
+                    >
+                        Add
+                    </Button>
                 </Box>
             </form>
 
@@ -73,8 +94,13 @@ function AdminAnnouncementsPage() {
                         <Card key={index} variant='elevated'>
                             <CardBody>
                                 <Text>
-                                    <Button onClick={() => handleDeleteAnnouncement(item)}>Delete</Button> {item.date}: {item.description}
+                                    <b>{item.date}</b>: {item.description}
                                 </Text>
+                                <Box textAlign='right'>
+                                    <IconButton border='2px solid pink'>
+                                        <FontAwesomeIcon icon={faTrashCan} onClick={() => handleDeleteAnnouncement(item)} color='black' />
+                                    </IconButton>
+                                </Box>
                             </CardBody>
                         </Card>
                     ))}
