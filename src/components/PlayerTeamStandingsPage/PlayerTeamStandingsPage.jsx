@@ -24,7 +24,7 @@ function PlayerTeamStandingsPage() {
                                 <Th color='#fadf5e' style={tableColumnStyle} textDecor='underline'>W</Th>
                                 <Th color='#fadf5e' style={tableColumnStyle} textDecor='underline'>D</Th>
                                 <Th color='#fadf5e' style={tableColumnStyle} textDecor='underline'>L</Th>
-                                <Th color='#fadf5e' style={tableColumnStyle} textDecor='underline'>+/-</Th>
+                                <Th color='#fadf5e' style={tableColumnStyle} textDecor='underline'>GD</Th>
                                 <Th color='#fadf5e' style={tableColumnStyle} textDecor='underline'>Pts</Th>
                             </Tr>
                         </Thead>

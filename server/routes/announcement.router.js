@@ -1,11 +1,14 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
 /**
  * GET all announcements!
  */
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     // console.log("announcements GET made it to the server side!");
     const sqlText = `
     SELECT 
@@ -29,7 +32,7 @@ router.get('/', (req, res) => {
 /**
  * POST new announcement!
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log("got the post over here on the server", req.body)
     const queryParams = [req.body.description];
     const sqlText = `
@@ -49,7 +52,7 @@ router.post('/', (req, res) => {
 /**
  * DELETE announcement!
  */
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     console.log("got the param over here on the server", req.params.id)
     const announcementId = [req.params.id];
     const sqlText = `

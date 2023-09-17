@@ -56,6 +56,7 @@ function* getGames() {
 function* getUserGames(action) {
     try {
         const teamId = action.payload;
+        console.log('team id is', teamId)
         const response = yield axios.get(`/api/game/usergames/${teamId}`)
         const userGames = response.data;
         console.log("received response.data:", userGames)

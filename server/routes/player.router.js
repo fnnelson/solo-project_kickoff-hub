@@ -1,8 +1,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
   console.log("made it to server side GET")
   const sqlText = `
   SELECT 
@@ -33,7 +36,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
   console.log("made it to server side PUT:", req.body, "and its ID:", req.params.id)
   const queryParams = [req.params.id, req.body.newTeam];
   const sqlText = `
