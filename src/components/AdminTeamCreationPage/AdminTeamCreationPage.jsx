@@ -12,7 +12,7 @@ function AdminTeamCreationPage() {
     // console.log("teams are", allTeams);
 
     /** 
-     *  Explanation of the below:
+     *  Explanation of the code below (I had to research):
      *  1. Calculate the count of players for each team
         2. The reduce function is used to transform an array into a single value. In this case, it's used to calculate the player count for each team.
         (counts, team) => This is an arrow function passed to reduce. It takes two parameters: counts (an accumulator) and team (the current team object being processed).
@@ -51,6 +51,7 @@ function AdminTeamCreationPage() {
                         {playersWithNoTeam.map((player, playerIndex) => (
                             <Text as='span' color='#fadf5e' key={playerIndex}>| {player.username || player.name} </Text>
                         ))}
+                        <Divider my='10px'/>
                         {allTeams.map((team, index) => (
                             <div key={index}>
                                 <Text color='#f7f7f7'>

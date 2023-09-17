@@ -22,7 +22,7 @@ function NavBottom({ toggleAdminMode, isAdminMode }) {
   const user = useSelector((store) => store.user);
 
   return (
-    <Box bg='#f7f7f7' borderTop='1px solid #383838' position='fixed' bottom='0' left='0' right='0'>
+    <Box bg='#f7f7f7' borderTop='1px solid #383838' position='fixed' bottom='0' left='0' right='0' zIndex='1000'>
       <Flex as='nav' m='2px'>
         {/* If a user is logged in, show these links */}
         {user.id && !user.admin && (

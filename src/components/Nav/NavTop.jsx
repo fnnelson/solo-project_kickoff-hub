@@ -20,6 +20,7 @@ function NavTop({ isAdminMode }) {
             top='0'
             left='0'
             right='0'
+            zIndex='1000'
             style={{ backgroundImage: user.id ? `url(${CanvaName}` : `url(${CanvaNoName})`, backgroundSize: 'cover' }}
         >
             < Flex as='nav' m='2px' >

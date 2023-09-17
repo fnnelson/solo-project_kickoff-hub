@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardBody, CardHeader, Center, Divider, HStack, Heading, Stack, StackDivider, Text } from "@chakra-ui/react";
+import { Box, Button, Card, CardBody, CardHeader, Center, Divider, HStack, Heading, Image, Stack, StackDivider, Text } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
@@ -65,7 +65,7 @@ function PlayerGameDetailsPage() {
                     }
                     <a href={gameDetails.maps_link} target="_blank" rel="noopener noreferrer">
                         <span style={{ position: 'relative' }}>
-                            <img
+                            <Image
                                 src={gameDetails.field_photo || 'http://via.placeholder.com/450x250'} // Use the provided photo URL or a placeholder
                                 alt="Field Photo"
                                 style={{
@@ -76,10 +76,10 @@ function PlayerGameDetailsPage() {
                             />
                         </span>
                     </a>
-                    <Text textAlign='right'>click photo for navigation <FontAwesomeIcon icon={faLocationArrow} /></Text>
+                    <Text color='#fadf5e' textAlign='right' fontSize='sm'>CLICK PHOTO FOR NAVIGATION <FontAwesomeIcon icon={faLocationArrow} /></Text>
                     <Stack textAlign='center' m='20px' fontWeight='bold' color='#f7f7f7'>
                         <Text fontSize='lg'>{gameDetails.field_name}</Text>
-                        <Text fontSize='md'>{gameDetails.address}</Text>
+                        <Text>{gameDetails.address}</Text>
                         <Text fontSize='lg'>{gameDetails.game_date} @ {gameDetails.game_time}</Text>
                     </Stack>
 

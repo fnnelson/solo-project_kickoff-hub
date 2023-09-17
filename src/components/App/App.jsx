@@ -59,8 +59,6 @@ function App() {
     }
   }, [dispatch, user.team_id]);
 
-// color options: #588157
-
 // Kickoff Hub color pallette: 
 // green - #3a7259
 // yellow - #fadf5e

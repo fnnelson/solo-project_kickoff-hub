@@ -16,6 +16,9 @@ function PlayerHome() {
     const user = useSelector((store) => store.user);
     const upcomingUserGames = useSelector(store => store.games.upcomingUserGames);
 
+    console.log('upcomingUserGames is:', upcomingUserGames)
+    console.log('user data:', user)
+
     const [nextGame, setNextGame] = useState('');
 
     useEffect(() => {
@@ -50,13 +53,15 @@ function PlayerHome() {
                     <Box>
                         <Box fontSize='xl' my='15px' >
                             <FontAwesomeIcon icon={faCircleUser} size="xl" color='#383838' />
-                            {/* <Text ml='15px' as='span'>Your team: </Text> */}
                         </Box>
                         {user.name ? <Heading color='#f7f7f7' textShadow='0 0 5px #383838'>Hello, {user.name}!</Heading> : <Heading color='#f7f7f7' textShadow='0 0 3px #383838'>Hello, {user.username}!</Heading>}
+                        <Box mt='10px'>
+                            <Text color='#fadf5e' mt='10px' as='span' fontSize='sm'>Your team: {nextGame.user_team_name}</Text>
+                        </Box>
                     </Box>
                 </StackItem>
                 <StackItem>
-                    <Box >
+                    <Box>
                         <Card
                             align='center'
                             style={{
@@ -64,9 +69,10 @@ function PlayerHome() {
                             }}
                             border='2px solid #383838'
                             onClick={goToNextGameDetails}
+                            p='10px'
                         >
                             <CardHeader >
-                                {nextGame.cancel_status ? <Heading size='md' align='center'>GAME CANCELED</Heading> : <Heading size='md' align='center'>NEXT GAME</Heading>}
+                                {nextGame.cancel_status ? <Heading size='md' align='center'>GAME CANCELED</Heading> : <Heading size='md' align='center' color='#383838'>NEXT GAME</Heading>}
 
                             </CardHeader>
                             <CardBody>

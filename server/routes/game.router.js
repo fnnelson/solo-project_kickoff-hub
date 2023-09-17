@@ -148,6 +148,10 @@ router.get('/usergames/:id', (req, res) => {
     away_team.wins AS away_team_wins,
     away_team.losses AS away_team_losses,
     away_team.draws AS away_team_draws,
+    CASE
+        WHEN game.home_team_id = $1 THEN home_team.team_name
+        WHEN game.away_team_id = $1 THEN away_team.team_name
+    END AS user_team_name,
     field.field_name,
     field.address,
     field.field_photo,

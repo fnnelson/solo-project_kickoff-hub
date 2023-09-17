@@ -17,7 +17,7 @@ function PlayerTeamStandingsPage() {
             {allTeams ? (
                 <TableContainer >
                     <Table variant='striped' colorScheme='blackAlpha' >
-                        <TableCaption fontSize='lg' placement='top' color='#fadf5e' textShadow='0 0 5px #383838'>League Standings</TableCaption>
+                        <TableCaption fontSize='lg' placement='top' color='#f7f7f7' textShadow='0 0 5px #383838'>League Standings</TableCaption>
                         <Thead>
                             <Tr>
                                 <Th color='#fadf5e' textDecor='underline'>Team</Th>
@@ -35,8 +35,17 @@ function PlayerTeamStandingsPage() {
                                     <Td color='#f7f7f7' textShadow='0 0 4px #383838' style={tableColumnStyle}>{team.wins}</Td>
                                     <Td color='#f7f7f7' textShadow='0 0 4px #383838' style={tableColumnStyle}>{team.losses}</Td>
                                     <Td color='#f7f7f7' textShadow='0 0 4px #383838' style={tableColumnStyle}>{team.draws}</Td>
-                                    <Td color='#f7f7f7' textShadow='0 0 4px #383838' style={tableColumnStyle}>{team.goal_differential}</Td>
-                                    <Td color='#f7f7f7' textShadow='0 0 4px #383838' style={tableColumnStyle}>{team.total_points}</Td>
+                                    <Td
+                                        color='#f7f7f7'
+                                        textAlign='center'
+                                        fontWeight='light'
+                                        style={{
+                                            ...tableColumnStyle,
+                                            textShadow: team.goal_differential > 0 ? '0 0 4px lightgreen' : team.goal_differential < 0 ? '0 0 4px red' : 'none'
+                                        }}>
+                                        {team.goal_differential}
+                                    </Td>
+                                    <Td fontWeight='semibold' color='#f7f7f7' textShadow='0 0 4px #383838' style={tableColumnStyle}>{team.total_points}</Td>
                                 </Tr>
                             ))
                             }
