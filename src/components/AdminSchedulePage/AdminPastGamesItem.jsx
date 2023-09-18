@@ -59,6 +59,7 @@ function AdminPastGamesItem({ game, user }) {
                     console.log("upcomingUserGames[0].team_name is:", user.team_id)
                     dispatch({ type: 'FETCH_GAMES' })
                     dispatch({ type: 'FETCH_USER_GAMES', payload: user.team_id })
+                    dispatch({ type: 'FETCH_TEAMS' })
                 })
                 .catch(error => {
                     console.error("1st PUT ain't PUTtin", error);

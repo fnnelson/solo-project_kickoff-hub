@@ -15,14 +15,14 @@ function LandingPage() {
 
   return (
     <div className="container">
-      <Text fontWeight='bold' color='white'>Welcome to KickOff Hub!</Text>
-      <Text color='white' fontStyle='italic'>Please Register Here:</Text>
+      <Text fontWeight='bold' color='#f7f7f7'>Welcome to KickOff Hub!</Text>
+      <Text color='#f7f7f7' fontStyle='italic'>Please Register Here:</Text>
 
       <div className="grid">
         <RegisterForm />
 
         <center>
-          <Text fontSize='sm' mb='5px'>Already a Member?</Text>
+          <Text fontSize='sm' mb='5px' color='#f7f7f7' >Already a Member?</Text>
           <Button
             bgColor='#fadf5e'
             outline='2px solid #383838'
@@ -35,12 +35,12 @@ function LandingPage() {
       <Box m='20px'>
         <Divider />
         <Heading py='20px'>
-          <Text as="h1" fontSize='lg'>Welcome to the KickOff Hub App</Text>
+          <Text color='#f7f7f7' as="h1" fontSize='lg'>Welcome to the KickOff Hub App</Text>
         </Heading>
 
         <Container my='20px'  >
-          <Text fontSize='lg' fontWeight='bold'>For Players:</Text>
-          <UnorderedList>
+          <Text fontSize='lg' fontWeight='bold' color='#fadf5e'>For Players:</Text>
+          <UnorderedList color='#f7f7f7'>
             <ListItem>
               <Text fontWeight='bold'>User-Friendly Sign-In</Text>
               <Text>Players can easily log in to the app, creating a personalized account that keeps track of their team and league-related information.</Text>
@@ -65,8 +65,8 @@ function LandingPage() {
         </Container >
 
         <Container my='20px' >
-          <Text fontSize='lg' fontWeight='bold'>For League Administrators:</Text>
-          <UnorderedList>
+          <Text fontSize='lg' fontWeight='bold' color='#fadf5e'>For League Administrators:</Text>
+          <UnorderedList color='#f7f7f7'>
             <ListItem>
               <Text fontWeight='bold'>Player Management</Text>
               <Text>Administrators can efficiently manage player registrations through the app. They can add new players, update player information, and ensure the roster is up to date.</Text>
@@ -87,7 +87,7 @@ function LandingPage() {
         </Container >
 
         <footer>
-          <Text>In summary, the KickOff Hub app serves as a centralized platform for all things related to organized sports. This comprehensive tool enhances the overall experience of both players and administrators, making sports leagues more organized and enjoyable for everyone involved.</Text>
+          <Text color='#fadf5e'>In summary, the KickOff Hub app serves as a centralized platform for all things related to organized sports. This comprehensive tool enhances the overall experience of both players and administrators, making sports leagues more organized and enjoyable for everyone involved.</Text>
         </footer>
 
       </Box>

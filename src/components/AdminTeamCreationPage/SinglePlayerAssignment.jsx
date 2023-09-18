@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { Box, Button, Radio, RadioGroup, Select, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Select, Text } from '@chakra-ui/react';
 
 function SinglePlayerAssignment({ player, allTeams }) {
+
+    useEffect(() => {
+        setSelectedTeam(player.team_id || ''); 
+        // I'm doing this because the dropdown value shows a default of the previously chosen team for another player in the same spot
+      }, [player]);
 
     const dispatch = useDispatch();
 
     // state object to track the selected team for each player
-    const [selectedTeam, setSelectedTeam] = useState(player.team_id || '');
+    const [selectedTeam, setSelectedTeam] = useState(player.team_id ? player.team_id : '');
 
     // handle team selection for a player
     const handleAssignment = (playerId) => {
