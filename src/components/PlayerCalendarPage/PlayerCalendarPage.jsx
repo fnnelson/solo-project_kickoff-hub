@@ -37,7 +37,6 @@ function PlayerCalendarPage() {
                                     </Card>
                                 ))}
                             </div>
-                            <Text color='#f7f7f7'>[x] - score has not yet been entered</Text>
                         </>
                     </TabPanel>
                     <TabPanel>

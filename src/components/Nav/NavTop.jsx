@@ -39,7 +39,7 @@ function NavTop({ isAdminMode }) {
                 {/* If no user is logged in, show these links */}
                 {
                     !user.id && (
-                        <Center flex='2' h='60px' style={{ color: '#f7f7f7', fontWeight: 'bold', textShadow: '0 0 5px #383838' }}>
+                        <Center flex='2' h='60px' style={{ color: '#383838', fontWeight: 'bold', textShadow: '0 0 2px #f7f7f7' }}>
                             <Link to="/login">
                                 Login / Register
                             </Link>

@@ -12,6 +12,7 @@ function PlayerPastGamesItem({ game }) {
                 <Text>{game.day_of_week}, {game.game_date} at {game.game_time}</Text>
                 <Text>{game.home_team_name} <b>[x]</b></Text>
                 <Text>{game.away_team_name} <b>[x]</b></Text>
+                <Text>[x] - scores yet to be entered</Text>
             </>
         ) : (
             <>

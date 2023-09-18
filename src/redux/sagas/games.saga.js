@@ -92,7 +92,7 @@ function* getUserGames(action) {
                 //     game.away_team_score = '[x]'
                 // }
                 // TODO: clean out comments if this has been fixed
-                oldGames.push(game);
+                oldGames.unshift(game);
             } else if (longGameDate >= todaysDate) {
                 // console.log('soccer game is in the future')
                 newGames.push(game);

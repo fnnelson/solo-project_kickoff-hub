@@ -49,7 +49,7 @@ function AdminTeamCreationPage() {
                             <b>No Team Assigned</b>, players #: <b>{playersWithNoTeam.length}</b>
                         </Text>
                         {playersWithNoTeam.map((player, playerIndex) => (
-                            <Text as='span' color='#fadf5e' key={playerIndex}>| {player.username || player.name} </Text>
+                            <Text as='span' color='#fadf5e' key={playerIndex}>| {player.name ? player.name : player.username} </Text>
                         ))}
                         <Divider my='10px'/>
                         {allTeams.map((team, index) => (
@@ -59,7 +59,7 @@ function AdminTeamCreationPage() {
                                 </Text>
                                 {allPlayers.map((player, playerIndex) => (
                                     player.team_id === team.id ? (
-                                        <Text as='span' color='#fadf5e' key={playerIndex}>| {player.username || player.name} </Text>
+                                        <Text as='span' color='#fadf5e' key={playerIndex}>| {player.name? player.name : player.username} </Text>
                                     ) : null
                                 ))}
                             </div>
