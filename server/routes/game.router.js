@@ -220,9 +220,9 @@ router.put('/score/:id', rejectUnauthenticated, async (req, res) => {
     try {
         await connection.query('BEGIN');
         const sqlText = `
-UPDATE "game"
-SET "home_team_score" = $2, "away_team_score" = $3, "home_team_result" = $4, "away_team_result" = $5 
-WHERE "id" = $1;
+    UPDATE "game"
+    SET "home_team_score" = $2, "away_team_score" = $3, "home_team_result" = $4, "away_team_result" = $5 
+    WHERE "id" = $1;
     `;
         const sqlText2 = `
     UPDATE team

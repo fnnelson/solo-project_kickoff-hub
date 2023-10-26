@@ -39,7 +39,7 @@ function PlayerHome() {
             <Text>Teams assigned one week prior to season start.  If within one week and no team assignment, it's recommended to contact the admin to confirm registration status.</Text>
         </Box>
     } else if (!nextGame) {
-        return <div><p>No Upcoming Games</p></div>
+        return <Box my={"100px"} textAlign={"center"}><Heading color={"#f7f7f7"}>No Upcoming Games</Heading></Box>
     }
 
     const goToNextGameDetails = () => {

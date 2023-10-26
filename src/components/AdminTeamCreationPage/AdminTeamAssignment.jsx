@@ -11,10 +11,10 @@ function AdminTeamAssignment({ allPlayers, allTeams }) {
 
     return (
         <div>
-            
+
             {playersWithNoTeam.length > 0 && (
                 <div>
-                    <Text textAlign='center' fontSize="lg" fontWeight="bold" mb="4">
+                    <Text textAlign='center' fontSize="lg" fontWeight="bold" mb="4" color={"#fadf5e"}>
                         Players with No Team
                     </Text>
                     {playersWithNoTeam.map((player, index) => (
@@ -24,10 +24,10 @@ function AdminTeamAssignment({ allPlayers, allTeams }) {
                     ))}
                 </div>
             )}
-
+            <br />
             {playersWithTeam.length > 0 && (
                 <div>
-                    <Text textAlign='center' fontSize="lg" fontWeight="bold" mb="4">
+                    <Text textAlign='center' fontSize="lg" fontWeight="bold" mb="4" color={"#fadf5e"}>
                         Players with Teams
                     </Text>
                     {playersWithTeam.map((player, index) => (

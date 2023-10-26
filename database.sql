@@ -128,9 +128,3 @@ VALUES
     ('2023-09-06', 'Upcoming Event: Mark your calendars for our leagues annual charity match on September 30th. It is a chance for us to come together, have some fun, and give back to the community. Stay tuned for more details on how you can get involved!'),
     ('2023-09-07', 'Weather Advisory: As we head into the fall season, be prepared for changing weather conditions. Bring appropriate clothing and stay informed about game cancellations or delays due to inclement weather. Safety first!'),
     ('2023-09-08', 'Season Finale: Our recreational soccer season is coming to a close, but not without a bang! Join us for the championship games, followed by our end-of-season celebration at the clubhouse. It has been a fantastic journey, and we look forward to seeing you there!');
-
--- can't enter this info in below (need to hash and salt passwords), but can use as reference
-INSERT INTO "user" (username, password, admin, name, position, fav_team, interests)
-VALUES
-    ('aquaman', '1234', false, 'Arthur', 'Forward', 'Fishy FC', 'Swimming, Checking the Weather, Tridents'),
-    ('superman', '1234', true, 'Clark', 'Defense', 'Valencia CF', 'Gadgets, Masks, Raves, Movie: Eyes Wide Shut');

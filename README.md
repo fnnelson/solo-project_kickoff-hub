@@ -4,23 +4,26 @@
 
 # KickOff Hub
 
-I play in an adult rec soccer league where players sign up individually, rate their own skill level, and teams are randomized so you play with new people every season. The league is self-managed, so most of the administrators are players themselves.
+## Inspiration for App
+I play in an adult rec soccer league where players sign up individually, rate their own skill level, and teams are randomized and balanced so you play with new people every season. The league is self-managed, so the administrators are usually participating in the league as well.
+
 I developed a starter app to be a logistical resource for the players, giving them quick info for their next games, directions, announcements, and (when they have more time) to look at previous game scores and league standings.  It also serves as an easy way for the admin (who is usually a player too) to handle scheduling, add announcements, update scores, and use all the same features as the other players.
+
 ## Color Reference
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| Primary Color | ![#3a7259](https://via.placeholder.com/10/3a7259?text=+) #3a7259 |
-| Secondary Color | ![#fadf5e](https://via.placeholder.com/10/fadf5e?text=+) #fadf5e |
-| Accent Color | ![#383838](https://via.placeholder.com/10/383838?text=+) #383838 |
-| Text Color | ![#f7f7f7](https://via.placeholder.com/10/f7f7f7?text=+) #f7f7f7 |
+| Background | ![#3a7259](https://via.placeholder.com/10/3a7259?text=+) #3a7259 |
+| Accent | ![#fadf5e](https://via.placeholder.com/10/fadf5e?text=+) #fadf5e |
+| Card Background / Text | ![#f7f7f7](https://via.placeholder.com/10/f7f7f7?text=+) #f7f7f7 |
+| Text (Secondary) | ![#383838](https://via.placeholder.com/10/383838?text=+) #383838 |
 
 
 ## Tech Stack
 
-**Client:** React, Redux, JavaScript, HTML, CSS, Chakra UI, FontAwesome Icons
+**Client:** React.js, Redux/Sagas, JavaScript, HTML, CSS, Chakra UI, FontAwesome Icons
 
-**Server:** Node, Express
+**Server:** Node.js, Express.js
 
 **Database:** PostgreSQL, Postico
 
@@ -47,7 +50,7 @@ I developed a starter app to be a logistical resource for the players, giving th
   npm install
 ```
 - add database called "kickoff_hub" (or rename DB in pool.js) 
-- database.sql has tables and starting data for use of app
+- database.sql has tables and starting data for use of app.  Game dates can be updated to be more relevant and to show all app features, I usually choose half in the past, half in the future.  Alternatively (as you will see below), games can be added by an administrator.
 
 ## Screenshots
 
@@ -85,7 +88,7 @@ I developed a starter app to be a logistical resource for the players, giving th
 #### Admin Announcements (bullhorn on nav bar)
 <img src="./src/assets/images/readme_screenshots/Screenshot_14_AdminAnnouncements.png" alt="Admin Announcements" width="300"/>
 
-#### About Page / Special thanks
+#### About Page / Special Thanks
 <img src="./src/assets/images/readme_screenshots/Screenshot_15_AboutPage.png" alt="About Page" width="300"/>
 
 ## 🔗 Links

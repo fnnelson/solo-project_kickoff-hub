@@ -51,7 +51,7 @@ function AdminTeamCreationPage() {
                         {playersWithNoTeam.map((player, playerIndex) => (
                             <Text as='span' color='#fadf5e' key={playerIndex}>| {player.name ? player.name : player.username} </Text>
                         ))}
-                        <Divider my='10px'/>
+                        <Divider my='10px' />
                         {allTeams.map((team, index) => (
                             <div key={index}>
                                 <Text color='#f7f7f7'>
@@ -59,7 +59,7 @@ function AdminTeamCreationPage() {
                                 </Text>
                                 {allPlayers.map((player, playerIndex) => (
                                     player.team_id === team.id ? (
-                                        <Text as='span' color='#fadf5e' key={playerIndex}>| {player.name? player.name : player.username} </Text>
+                                        <Text as='span' color='#fadf5e' key={playerIndex}>| {player.name ? player.name : player.username} </Text>
                                     ) : null
                                 ))}
                             </div>
@@ -81,7 +81,7 @@ function AdminTeamCreationPage() {
                 Match players to teams:
             </Heading>
 
-            < AdminTeamAssignment allPlayers={allPlayers} allTeams={allTeams} />
+            <AdminTeamAssignment allPlayers={allPlayers} allTeams={allTeams} />
 
         </div >
     );
